@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f4f0e8">
+<title>もしも、あなたがヒゲダンのセトリを組んだなら。</title>
+<style>
+:root{--bg:#fbfaf6;--paper:#fffefa;--ink:#292824;--muted:#8b877f;--line:#e6e0d6;--soft:#f0ece4;--accent:#4a463f}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 12% 0%,#fffdf4 0,#fbfaf6 38%,#f3f5f1 72%,#f8f1ec 100%);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
+header{position:relative;overflow:hidden;background:linear-gradient(135deg,#fffdf6 0%,#f7f3eb 52%,#f2f6f1 100%);color:#292824;padding:30px 14px 25px;text-align:center;border-bottom:1px solid #e8e2d8}
+header:before,header:after{content:"";position:absolute;border:1px solid rgba(90,80,65,.10);border-radius:50%;width:180px;height:180px;top:-105px}
+header:before{left:-95px} header:after{right:-95px}
+.artist{font-size:12px;letter-spacing:.18em;color:#665f55;margin-bottom:10px;font-weight:600}
+header h1{font-size:25px;line-height:1.35;margin:0;font-weight:700;letter-spacing:.02em;color:#292824}
+header p{font-size:11px;letter-spacing:.16em;color:#8d877d;margin:9px 0 0}
+.animals{display:flex;justify-content:center;gap:7px;margin:20px auto 0;position:relative;z-index:1;max-width:360px}
+.animal{width:78px;height:66px;border:1px solid rgba(90,80,65,.14);border-radius:18px;background:rgba(255,255,255,.62);display:flex;flex-direction:column;align-items:center;justify-content:center;backdrop-filter:blur(5px);box-shadow:0 5px 16px rgba(80,70,55,.06);flex:1 1 0;min-width:0}
+.animal .emoji{font-size:25px;line-height:1}.animal small{font-size:10px;letter-spacing:.02em;margin-top:5px;color:#5f594f;white-space:nowrap;line-height:1}
+main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
+.card{background:rgba(255,253,248,.9);border:1px solid var(--line);border-radius:20px;padding:17px;margin-bottom:15px;box-shadow:0 8px 28px rgba(70,60,40,.06)}
+.card-title{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:13px}.card-title h2{font-size:16px;margin:0;letter-spacing:.02em}.card-title span{font-size:10px;color:#a09a90;letter-spacing:.14em}
+.search{width:100%;padding:13px 14px;border:1px solid #d4cec2;border-radius:13px;font-size:16px;background:#fffefa;color:var(--ink);outline:none}.search:focus{border-color:#8f897e;box-shadow:0 0 0 3px rgba(90,85,75,.08)}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:10px 0}.count{font-size:12px;color:var(--muted)}
+.sort-select{border:1px solid #d4cec2;background:#fffefa;color:var(--ink);border-radius:10px;padding:8px 10px;font-size:12px}
+.song-list{max-height:390px;overflow:auto;border-top:1px solid var(--soft)}
+.song{display:flex;align-items:center;gap:10px;padding:11px 3px;border-bottom:1px solid #eee9df}.song input{width:19px;height:19px;accent-color:#34322e}.song-name{font-size:14px;flex:1}.song-album{font-size:10px;color:#aaa49a}
+.notice{font-size:11px;color:#777166;background:#f5f1e9;border-radius:11px;padding:9px 10px;margin-top:10px;line-height:1.55}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}button{border:1px solid #2e2c28;background:#2e2c28;color:#fffaf0;border-radius:11px;padding:11px 14px;font-size:12px;font-weight:600}button.secondary{background:#fffefa;color:#2e2c28;border-color:#d4cec2}button:disabled{opacity:.35}
+.setlist{margin-top:4px}.set-row{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:#fffefa;border-radius:13px;padding:10px 9px;margin:7px 0;touch-action:none;user-select:none;box-shadow:0 2px 8px rgba(60,55,45,.03)}.set-row.dragging{opacity:.35}.num{font-size:10px;color:#9b958b;width:30px;text-align:center;flex:none}.grip{font-size:16px;color:#aaa49a;width:18px;flex:none}.set-title{font-size:14px;flex:1}.remove{border:0;background:transparent;color:#aaa49a;font-size:20px;padding:0 5px}.encore-label{text-align:center;letter-spacing:.3em;font-size:10px;font-weight:700;color:#777166;margin:20px 0 8px;padding-top:14px;border-top:1px dashed #c9c1b4}.empty{text-align:center;color:#aaa49a;padding:25px 10px;font-size:12px}
+.preview-wrap{border:1px solid #d9d2c6;border-radius:16px;padding:8px;background:#ece7dd}.preview{background:#fffdf8;border:1px solid #e2dbcf;padding:28px 20px;text-align:center;border-radius:11px}.preview h3{font-size:10px;letter-spacing:.26em;margin:0 0 7px}.preview h4{font-size:20px;margin:0 0 22px}.preview .p-row{font-size:14px;text-align:left;padding:7px 0;border-bottom:1px solid #eee9df}.preview .p-encore{font-size:10px;letter-spacing:.25em;font-weight:700;color:#777166;margin:22px 0 8px}.small{font-size:10px;color:#8b857b;line-height:1.6}
+.footer-note{text-align:center;color:#aaa49a;font-size:10px;letter-spacing:.08em;margin-top:25px}
+@media(max-width:500px){header h1{font-size:21px}.card{padding:14px}.song-album{display:none}.animal{height:60px;padding:0 2px}.animal .emoji{font-size:23px}.animal small{font-size:9px}.animals{gap:5px;max-width:350px}}
+
+.title-input{width:100%;border:1px solid var(--line);background:#fffefa;border-radius:14px;padding:13px 15px;font-size:16px;color:var(--ink);outline:none}
+.title-input:focus{border-color:#b9b1a4;box-shadow:0 0 0 3px rgba(100,90,70,.07)}
+.special-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.special-btn{background:#f7f3eb;border:1px solid #e2dbcf;color:#4a463f;border-radius:12px;padding:11px 10px;text-align:left;font-size:13px;cursor:pointer}
+.special-btn:active{transform:translateY(1px)}
+.set-row.special{background:#f8f5ef;border-style:dashed}
+.special-badge{font-size:10px;letter-spacing:.08em;color:#9a9388;border:1px solid #d9d1c4;border-radius:999px;padding:3px 7px;white-space:nowrap}
+.p-special{padding:10px 0;border-bottom:1px dashed #ded7cc;color:#5f5a52;font-size:14px}
+@media(max-width:420px){.special-grid{grid-template-columns:1fr 1fr}.special-btn{font-size:12px;padding:10px 8px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="artist">Official髭男dism</div>
+  <h1>もしも、あなたがヒゲダンの<br>セトリを組んだなら。</h1>
+  <p>FICTIONAL SETLIST MAKER</p>
+  <div class="animals" aria-label="Official髭男dism members inspired animal motifs">
+    <div class="animal"><div class="emoji">🐨</div><small>さとっちゃん</small></div>
+    <div class="animal"><div class="emoji">🐱</div><small>だいちゃん</small></div>
+    <div class="animal"><div class="emoji">🦍</div><small>ならちゃん</small></div>
+    <div class="animal"><div class="emoji">🐻</div><small>ちゃんまつ</small></div>
+  </div>
+</header>
+<main>
+  <section class="card">
+    <div class="card-title"><h2>① ライブタイトルを決める</h2><span>TOUR TITLE</span></div>
+    <input id="tourTitle" class="title-input" maxlength="40" value="" placeholder="例：HIGEDAN SPECIAL LIVE 2026">
+    <div class="small" style="margin-top:9px">あなたの好きなライブタイトルをつけられます。</div>
+  </section>
+  <section class="card">
+    <div class="card-title"><h2>② 楽曲を選ぶ</h2><span>SELECT SONGS</span></div>
+    <input id="search" class="search" placeholder="曲名・アルバム名で検索">
+    <div class="toolbar"><div id="count" class="count">0 / 25曲 選択中</div><select id="sortSelect" class="sort-select" aria-label="曲順"><option value="release">リリース順</option><option value="title">アルファベット・五十音順</option></select></div>
+    <div id="songList" class="song-list"></div>
+    <div class="notice">最大25曲。選んだ曲は下のセトリ編集欄に追加されます。順番はあとから自由に変更できます。</div>
+  </section>
+  <section class="card">
+    <div class="card-title"><h2>③ MC・演出を入れる</h2><span>OPTIONAL ITEMS</span></div>
+    <div class="special-grid" id="specialGrid"></div>
+    <div class="small" style="margin-top:10px">入れたいものだけタップして追加できます。曲と同じように並べ替え・削除できます。</div>
+  </section>
+  <section class="card">
+    <div class="card-title"><h2>④ セトリを並べ替える</h2><span>SETLIST</span></div>
+    <div id="setlist" class="setlist"></div>
+    <div class="actions"><button id="clearBtn" class="secondary">全部クリア</button><button id="randomBtn" class="secondary">🎲 とりあえずランダム</button></div>
+    <div class="small" style="margin-top:10px">曲を長押しして上下に動かせます。最後の3曲は自動的にENCOREになります。</div>
+  </section>
+  <section class="card">
+    <div class="card-title"><h2>④ 完成イメージ</h2><span>YOUR TOUR</span></div>
+    <div class="preview-wrap"><div id="preview" class="preview"></div></div>
+    <div class="actions"><button id="saveBtn">画像として保存</button></div>
+    <div class="small" style="margin-top:10px">完成したセトリは画像として保存できます。</div>
+  </section>
+  <div class="footer-note">make your own HIGEDAN night ♡</div>
+</main>
+<script>
+const songs = [
+["SWEET TWEET","ラブとピースは君の中"],["恋の前ならえ","ラブとピースは君の中"],["夕暮れ沿い","ラブとピースは君の中"],["雪急く朝が来る","ラブとピースは君の中"],["始発が導く幸福論","ラブとピースは君の中"],["愛なんだが…","ラブとピースは君の中"],["parade","ラブとピースは君の中"],["ダーリン。","ラブとピースは君の中"],
+["Clap Clap","MAN IN THE MIRROR"],["コーヒーとシロップ","MAN IN THE MIRROR"],["Happy Birthday To You","MAN IN THE MIRROR"],["恋の去り際","MAN IN THE MIRROR"],["ゼロのままでいられたら","MAN IN THE MIRROR"],["日曜日のラブレター","MAN IN THE MIRROR"],
+["What's Going On?","What's Going On?"],["未完成なままで","What's Going On?"],["ニットの帽子","What's Going On?"],["黄色い車","What's Going On?"],
+["始まりの朝","レポート"],["犬かキャットかで死ぬまで喧嘩しよう!","レポート"],["異端なスター","レポート"],["55","レポート"],["Rolling","レポート"],["イコール","レポート"],["Trailer","レポート"],
+["115万キロのフィルム","エスカパレード"],["ノーダウト","エスカパレード"],["ESCAPADE","エスカパレード"],["LADY","エスカパレード"],["たかがアイラブユー","エスカパレード"],["されど日々は","エスカパレード"],["可能性","エスカパレード"],["Tell Me Baby","エスカパレード"],["Second LINE","エスカパレード"],["Driver","エスカパレード"],["相思相愛","エスカパレード"],["ブラザーズ","エスカパレード"],["発明家","エスカパレード"],
+["イエスタデイ","Traveler"],["宿命","Traveler"],["Amazing","Traveler"],["Rowan","Traveler"],["バッドフォーミー","Traveler"],["最後の恋煩い","Traveler"],["ビンテージ","Traveler"],["Stand By You","Traveler"],["FIRE GROUND","Traveler"],["旅は道連れ","Traveler"],["052519","Traveler"],["Pretender","Traveler"],["ラストソング","Traveler"],["Travelers","Traveler"],
+["HELLO","Editorial"],["パラボラ","Editorial"],["Laughter","Editorial"],["夏模様の猫","HELLO EP"],["Universe","Editorial"],["Editorial","Editorial"],["アポトーシス","Editorial"],["I LOVE...","Editorial"],["フィラメント","Editorial"],["Cry Baby","Editorial"],["Shower","Editorial"],["みどりの雨避け","Editorial"],["ペンディング・マシーン","Editorial"],["Bedroom Talk","Editorial"],["Lost In My Room","Editorial"],
+["ミックスナッツ","Rejoice"],["Anarchy","ミックスナッツEP / Rejoice"],["Choral A","ミックスナッツEP"],["Subtitle","Rejoice"],["ホワイトノイズ","Rejoice"],["SOULSOUP","Rejoice"],["キャッチボール","Rejoice"],["日常","Rejoice"],["I'm home (interlude)","Rejoice"],["Sharon","Rejoice"],["濁点","Rejoice"],["うらみつらみきわみ","Rejoice"],["Chessboard","Rejoice"],["TATTOO","Rejoice"],["B-Side Blues","Rejoice"],["Finder","Rejoice"],["Get Back To 人生","Rejoice"],
+["Same Blue","Same Blue"],["50%","50%"],["らしさ","らしさ"],["Sanitizer","Sanitizer"],["Make Me Wonder","Make Me Wonder"],["スターダスト","スターダスト / エルダーフラワー"],["エルダーフラワー","スターダスト / エルダーフラワー"]
+].map((x,i)=>({id:i,name:x[0],album:x[1]}));
+
+let selected=[]; let setItems=[]; let sortMode='release'; let tourTitle='';
+const listEl=document.getElementById('songList'),searchEl=document.getElementById('search'),countEl=document.getElementById('count'),setEl=document.getElementById('setlist'),previewEl=document.getElementById('preview'),tourTitleEl=document.getElementById('tourTitle'),specialGrid=document.getElementById('specialGrid');
+const readings={
+'SWEET TWEET':'すうぃーとついーと','恋の前ならえ':'こいのまえならえ','夕暮れ沿い':'ゆうぐれぞい','雪急く朝が来る':'ゆきせくあさがくる','始発が導く幸福論':'しはつがみちびくこうふくろん','愛なんだが…':'あいなんだが','parade':'ぱれーど','ダーリン。':'だーりん','Clap Clap':'くらっぷくらっぷ','コーヒーとシロップ':'こーひーとしろっぷ','Happy Birthday To You':'はっぴーばーすでーとぅーゆー','恋の去り際':'こいのさりぎわ','ゼロのままでいられたら':'ぜろのままでいられたら','日曜日のラブレター':'にちようびのらぶれたー',
+"What's Going On?":'わっつごーいんぐおん','未完成なままで':'みかんせいなままで','ニットの帽子':'にっとのぼうし','黄色い車':'きいろいくるま','始まりの朝':'はじまりのあさ','犬かキャットかで死ぬまで喧嘩しよう!':'いぬかきゃっとかでしぬまでけんかしよう','異端なスター':'いたんなすたー','55':'ごーごー','Rolling':'ろーりんぐ','イコール':'いこーる','Trailer':'とれーらー',
+'115万キロのフィルム':'ひゃくじゅうごまんきろのふぃるむ','ノーダウト':'のーだうと','ESCAPADE':'えすかぺーど','LADY':'れでぃー','たかがアイラブユー':'たかがあいらぶゆー','されど日々は':'されどひびは','可能性':'かのうせい','Tell Me Baby':'てるみーべいびー','Second LINE':'せかんどらいん','Driver':'どらいばー','相思相愛':'そうしそうあい','ブラザーズ':'ぶらざーず','発明家':'はつめいか',
+'イエスタデイ':'いえすたでい','宿命':'しゅくめい','Amazing':'あめいじんぐ','Rowan':'ろーわん','バッドフォーミー':'ばっどふぉーみー','最後の恋煩い':'さいごのこいわずらい','ビンテージ':'びんてーじ','Stand By You':'すたんどばいゆー','FIRE GROUND':'ふぁいやーぐらうんど','旅は道連れ':'たびはみちづれ','052519':'ぜろごーにーごーいちきゅう','Pretender':'ぷりてんだー','ラストソング':'らすとそんぐ','Travelers':'とらべらーず',
+'HELLO':'はろー','パラボラ':'ぱらぼら','Laughter':'らふたー','夏模様の猫':'なつもようのねこ','Universe':'ゆにばーす','Editorial':'えでぃとりある','アポトーシス':'あぽとーしす','I LOVE...':'あいらぶ','フィラメント':'ふぃらめんと','Cry Baby':'くらいべいびー','Shower':'しゃわー','みどりの雨避け':'みどりのあまよけ','ペンディング・マシーン':'ぺんでぃんぐましーん','Bedroom Talk':'べっどるーむとーく','Lost In My Room':'ろすといんまいるーむ',
+'ミックスナッツ':'みっくすなっつ','Anarchy':'あなーきー','Choral A':'こーらるえー','Subtitle':'さぶたいとる','ホワイトノイズ':'ほわいとのいず','SOULSOUP':'そうるすーぷ','キャッチボール':'きゃっちぼーる','日常':'にちじょう',"I'm home (interlude)":'あいむほーむ','Sharon':'しゃろん','濁点':'だくてん','うらみつらみきわみ':'うらみつらみきわみ','Chessboard':'ちぇすぼーど','TATTOO':'たとぅー','B-Side Blues':'びーさいどぶるーす','Finder':'ふぁいんだー','Get Back To 人生':'げっとばっくとじんせい',
+'Same Blue':'せいむぶるー','50%':'ごじゅっぱーせんと','らしさ':'らしさ','Sanitizer':'さんいたいざー','Make Me Wonder':'めいくみーわんだー','スターダスト':'すたーだすと','エルダーフラワー':'えるだーふらわー'};
+const titleCollator=new Intl.Collator('ja',{sensitivity:'base',numeric:true});
+function sortedSongs(){const arr=[...songs];if(sortMode==='title')arr.sort((a,b)=>titleCollator.compare(readings[a.name]||a.name,readings[b.name]||b.name));return arr}
+function renderSongs(){const q=searchEl.value.trim().toLowerCase();listEl.innerHTML='';sortedSongs().filter(s=>!q||s.name.toLowerCase().includes(q)||s.album.toLowerCase().includes(q)).forEach(s=>{const row=document.createElement('label');row.className='song';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.includes(s.id);cb.addEventListener('change',()=>{if(cb.checked){if(selected.length>=25){cb.checked=false;alert('セトリに入れられるのは最大25曲です！');return}selected.push(s.id)}else selected=selected.filter(id=>id!==s.id);renderAll()});row.append(cb);const name=document.createElement('div');name.className='song-name';name.textContent=s.name;const album=document.createElement('div');album.className='song-album';album.textContent=s.album;row.append(name,album);listEl.append(row)});countEl.textContent=`${selected.length} / 25曲 選択中`}
+function selectedSongs(){return selected.map(id=>songs.find(s=>s.id===id)).filter(Boolean)}
+const specialItems=['メンバー紹介','MC（軽めのやつ）','MC（盛り上げ系）','MC（泣かせにくる系）','MC（語る系）','チーム髭男の紹介','最後の挨拶','さとし服を脱ぐ'];
+function makeSongItem(id){return {type:'song',id}}
+function makeSpecialItem(name){return {type:'special',name,id:'sp-'+Date.now()+'-'+Math.random()}}
+function renderSpecialButtons(){
+  specialGrid.innerHTML='';
+  specialItems.forEach(name=>{
+    const b=document.createElement('button'); b.type='button'; b.className='special-btn'; b.textContent=name;
+    b.onclick=()=>{setItems.push(makeSpecialItem(name));renderAll()};
+    specialGrid.append(b);
+  });
+}
+function currentItems(){
+  return setItems.map(item=>item.type==='song'
+    ? {...item, song:songs.find(s=>s.id===item.id)}
+    : item).filter(item=>item.type==='special'||item.song);
+}
+function syncSongItems(){
+  const specials=setItems.filter(x=>x.type==='special');
+  const songIds=new Set(setItems.filter(x=>x.type==='song').map(x=>x.id));
+  selected.forEach(id=>{if(!songIds.has(id)) setItems.push(makeSongItem(id))});
+  setItems=setItems.filter(x=>x.type==='special'||selected.includes(x.id));
+}
+function renderSetlist(){
+  syncSongItems();
+  const arr=currentItems(); setEl.innerHTML='';
+  if(!arr.length){setEl.innerHTML='<div class="empty">上から曲やMC・演出を追加すると、ここにセトリが表示されます。</div>';return}
+  arr.forEach((item,i)=>{
+    if(i===arr.length-3&&arr.length>=3){const label=document.createElement('div');label.className='encore-label';label.textContent='ENCORE';setEl.append(label)}
+    const row=document.createElement('div'); row.className='set-row'+(item.type==='special'?' special':''); row.dataset.index=i;
+    const title=item.type==='song'?item.song.name:item.name;
+    row.innerHTML=`<div class="grip">☷</div><div class="num">${i>=arr.length-3&&arr.length>=3?'EN'+(i-(arr.length-3)+1):String(i+1).padStart(2,'0')}</div><div class="set-title"></div>${item.type==='special'?'<span class="special-badge">MC / EVENT</span>':''}<button class="remove" aria-label="削除">×</button>`;
+    row.querySelector('.set-title').textContent=title;
+    row.querySelector('.remove').onclick=()=>{
+      const target=setItems.findIndex(x=>x.type===item.type && (x.type==='song'?x.id===item.id:x.id===item.id));
+      if(target>=0)setItems.splice(target,1);
+      if(item.type==='song')selected=selected.filter(id=>id!==item.id);
+      renderAll();
+    };
+    setupPointerDrag(row); setEl.append(row);
+  });
+}
+let dragIndex=null;
+function setupPointerDrag(row){
+  row.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;dragIndex=Number(row.dataset.index);row.setPointerCapture(e.pointerId);row.classList.add('dragging')});
+  row.addEventListener('pointermove',e=>{
+    if(dragIndex===null)return;
+    const rows=[...setEl.querySelectorAll('.set-row')]; const y=e.clientY;
+    let target=rows.findIndex(r=>{const b=r.getBoundingClientRect();return y<b.top+b.height/2});
+    if(target<0)target=rows.length-1;
+    if(target!==dragIndex){
+      const ordered=currentItems();
+      const moved=ordered.splice(dragIndex,1)[0]; ordered.splice(target,0,moved);
+      setItems=ordered.map(x=>x.type==='song'?makeSongItem(x.id):x);
+      dragIndex=target; renderSetlist(); renderPreview();
+      const newRow=[...setEl.querySelectorAll('.set-row')][target]; if(newRow)newRow.classList.add('dragging');
+    }
+  });
+  row.addEventListener('pointerup',()=>{dragIndex=null;renderSetlist()});
+  row.addEventListener('pointercancel',()=>{dragIndex=null;renderSetlist()});
+}
+function renderPreview(){
+  const arr=currentItems();
+  const title=(tourTitleEl.value||'').trim()||'あなたのためのone-man tour';
+  let html='<h3>Official髭男dism</h3><h4>'+escapeHtml(title)+'</h4>';
+  if(!arr.length) html+='<div class="empty">セトリを作成するとここに表示されます。</div>';
+  else arr.forEach((item,i)=>{
+    if(i===arr.length-3&&arr.length>=3)html+='<div class="p-encore">ENCORE</div>';
+    const n=(i>=arr.length-3&&arr.length>=3)?'EN'+(i-(arr.length-3)+1):String(i+1).padStart(2,'0');
+    if(item.type==='special') html+=`<div class="p-special"><b>${n}</b>　${escapeHtml(item.name)}</div>`;
+    else html+=`<div class="p-row"><b>${n}</b>　${escapeHtml(item.song.name)}</div>`;
+  });
+  previewEl.innerHTML=html
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function renderAll(){renderSpecialButtons();renderSongs();renderSetlist();renderPreview()}
+searchEl.addEventListener('input',renderSongs);
+document.getElementById('sortSelect').addEventListener('change',e=>{sortMode=e.target.value;renderSongs()});
+tourTitleEl.addEventListener('input',()=>{tourTitle=tourTitleEl.value;renderPreview()});
+document.getElementById('clearBtn').onclick=()=>{selected=[];setItems=[];renderAll()};
+document.getElementById('randomBtn').onclick=()=>{
+  const shuffled=[...songs].sort(()=>Math.random()-.5).slice(0,25);
+  selected=shuffled.map(s=>s.id); setItems=selected.map(id=>makeSongItem(id)); renderAll()
+};
+document.getElementById('saveBtn').onclick=()=>{
+  const arr=currentItems(); if(!arr.length){alert('まずセトリを作ってね！');return}
+  const title=(tourTitleEl.value||'').trim()||'あなたのためのone-man tour';
+  const canvas=document.createElement('canvas'); canvas.width=1000; canvas.height=Math.max(900,440+arr.length*52);
+  const c=canvas.getContext('2d'); c.fillStyle='#fffdf8';c.fillRect(0,0,canvas.width,canvas.height);
+  c.fillStyle='#292824';c.textAlign='center';c.font='bold 20px sans-serif';c.fillText('Official髭男dism',500,62);
+  c.font='bold 32px sans-serif';c.fillText(title,500,112);c.font='14px sans-serif';c.fillStyle='#8b877f';c.fillText('FICTIONAL SETLIST',500,140);
+  c.textAlign='left';c.fillStyle='#262522';let y=185;
+  arr.forEach((item,i)=>{
+    if(i===arr.length-3&&arr.length>=3){c.font='bold 15px sans-serif';c.textAlign='center';c.fillStyle='#777166';c.fillText('ENCORE',500,y);y+=42;c.textAlign='left';c.fillStyle='#262522'}
+    const n=(i>=arr.length-3&&arr.length>=3)?`EN${i-(arr.length-3)+1}`:String(i+1).padStart(2,'0');
+    c.font=item.type==='special'?'16px sans-serif':'19px sans-serif';
+    c.fillText(`${n}  ${item.type==='special'?'◆ '+item.name:item.song.name}`,90,y);y+=43
+  });
+  const a=document.createElement('a');a.download='higedan-fictional-setlist.png';a.href=canvas.toDataURL('image/png');a.click()
+};
+renderAll();
+</script>
+</body>
+</html>
