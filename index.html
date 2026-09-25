@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111111">
+<title>Official髭男dism あなたのためのone-man tour</title>
+<style>
+:root{--bg:#f6f6f6;--card:#fff;--text:#111;--muted:#777;--line:#ddd;--accent:#111}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,sans-serif}
+header{background:#111;color:#fff;padding:28px 18px 24px;text-align:center}
+header .artist{font-size:13px;letter-spacing:.18em;margin-bottom:8px}
+header h1{font-size:23px;line-height:1.35;margin:0;font-weight:700}
+header p{font-size:12px;opacity:.7;margin:9px 0 0}
+main{max-width:760px;margin:0 auto;padding:16px 14px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:14px;box-shadow:0 2px 8px rgba(0,0,0,.03)}
+h2{font-size:16px;margin:0 0 12px}
+.search{width:100%;padding:12px 13px;border:1px solid #ccc;border-radius:10px;font-size:16px;background:#fff}
+.count{font-size:13px;color:var(--muted);margin:10px 0}
+.song-list{max-height:390px;overflow:auto;border-top:1px solid var(--line)}
+.song{display:flex;align-items:center;gap:10px;padding:11px 3px;border-bottom:1px solid #eee}
+.song input{width:20px;height:20px;accent-color:#111}
+.song-name{font-size:14px;flex:1}
+.song-album{font-size:11px;color:#999}
+.notice{font-size:12px;color:#666;background:#f5f5f5;border-radius:9px;padding:9px;margin-top:10px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+button{border:1px solid #222;background:#111;color:#fff;border-radius:10px;padding:11px 14px;font-size:13px;font-weight:600}
+button.secondary{background:#fff;color:#111;border-color:#ccc}
+button:disabled{opacity:.35}
+.setlist{margin-top:4px}
+.set-row{display:flex;align-items:center;gap:9px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 9px;margin:7px 0;touch-action:none;user-select:none}
+.set-row.dragging{opacity:.35}
+.num{font-size:12px;color:#888;width:28px;text-align:center;flex:none}
+.grip{font-size:18px;color:#aaa;width:20px;flex:none}
+.set-title{font-size:14px;flex:1}
+.remove{border:0;background:transparent;color:#999;font-size:20px;padding:0 5px}
+.encore-label{text-align:center;letter-spacing:.22em;font-size:12px;font-weight:700;margin:20px 0 8px;padding-top:14px;border-top:1px solid #bbb}
+.empty{text-align:center;color:#aaa;padding:25px 10px;font-size:13px}
+.preview{background:#fff;border:1px solid #ddd;padding:28px 20px;text-align:center}
+.preview h3{font-size:12px;letter-spacing:.18em;margin:0 0 5px}
+.preview h4{font-size:20px;margin:0 0 22px}
+.preview .p-row{font-size:14px;text-align:left;padding:6px 0;border-bottom:1px solid #eee}
+.preview .p-encore{font-size:11px;letter-spacing:.18em;font-weight:700;margin:22px 0 8px}
+.small{font-size:11px;color:#888;line-height:1.6}
+@media(max-width:500px){header h1{font-size:21px}.card{padding:14px}.song-album{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="artist">OFFICIAL HIGE DANDISM</div>
+  <h1>あなたのためのone-man tour</h1>
+  <p>架空セトリメーカー</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>① 楽曲を選ぶ</h2>
+    <input id="search" class="search" placeholder="曲名・アルバム名で検索">
+    <div id="count" class="count">0 / 25曲 選択中</div>
+    <div id="songList" class="song-list"></div>
+    <div class="notice">最大25曲。チェックした曲が下のセトリ編集欄に追加されます。</div>
+  </section>
+
+  <section class="card">
+    <h2>② セトリを並べ替える</h2>
+    <div id="setlist" class="setlist"></div>
+    <div class="actions">
+      <button id="clearBtn" class="secondary">全部クリア</button>
+      <button id="randomBtn" class="secondary">🎲 とりあえずランダム</button>
+    </div>
+    <div class="small" style="margin-top:10px">曲を長押しして上下に動かせます。最後の3曲は自動的にアンコール表示になります。</div>
+  </section>
+
+  <section class="card">
+    <h2>③ 完成イメージ</h2>
+    <div id="preview" class="preview"></div>
+    <div class="actions">
+      <button id="saveBtn">画像として保存</button>
+      <button id="shareBtn" class="secondary">共有する</button>
+    </div>
+    <div class="small" style="margin-top:10px">画像保存は端末・ブラウザによって表示方法が異なる場合があります。</div>
+  </section>
+</main>
+
+<script>
+const songs = [
+["SWEET TWEET","ラブとピースは君の中"],["恋の前ならえ","ラブとピースは君の中"],["夕暮れ沿い","ラブとピースは君の中"],["雪急く朝が来る","ラブとピースは君の中"],["始発が導く幸福論","ラブとピースは君の中"],["愛なんだが…","ラブとピースは君の中"],["parade","ラブとピースは君の中"],["ダーリン。","ラブとピースは君の中"],
+["Clap Clap","MAN IN THE MIRROR"],["コーヒーとシロップ","MAN IN THE MIRROR"],["Happy Birthday To You","MAN IN THE MIRROR"],["恋の去り際","MAN IN THE MIRROR"],["ゼロのままでいられたら","MAN IN THE MIRROR"],["日曜日のラブレター","MAN IN THE MIRROR"],
+["What's Going On?","What's Going On?"],["未完成なままで","What's Going On?"],["ニットの帽子","What's Going On?"],["黄色い車","What's Going On?"],
+["始まりの朝","レポート"],["犬かキャットかで死ぬまで喧嘩しよう!","レポート"],["異端なスター","レポート"],["55","レポート"],["Rolling","レポート"],["イコール","レポート"],["Trailer","レポート"],
+["115万キロのフィルム","エスカパレード"],["ノーダウト","エスカパレード"],["ESCAPADE","エスカパレード"],["LADY","エスカパレード"],["たかがアイラブユー","エスカパレード"],["されど日々は","エスカパレード"],["可能性","エスカパレード"],["Tell Me Baby","エスカパレード"],["Second LINE","エスカパレード"],["Driver","エスカパレード"],["相思相愛","エスカパレード"],["ブラザーズ","エスカパレード"],["発明家","エスカパレード"],
+["イエスタデイ","Traveler"],["宿命","Traveler"],["Amazing","Traveler"],["Rowan","Traveler"],["バッドフォーミー","Traveler"],["最後の恋煩い","Traveler"],["ビンテージ","Traveler"],["Stand By You","Traveler"],["FIRE GROUND","Traveler"],["旅は道連れ","Traveler"],["052519","Traveler"],["Pretender","Traveler"],["ラストソング","Traveler"],["Travelers","Traveler"],
+["HELLO","Editorial"],["パラボラ","Editorial"],["Laughter","Editorial"],["夏模様の猫","HELLO EP"],
+["Universe","Editorial"],["Editorial","Editorial"],["アポトーシス","Editorial"],["I LOVE...","Editorial"],["フィラメント","Editorial"],["Cry Baby","Editorial"],["Shower","Editorial"],["みどりの雨避け","Editorial"],["ペンディング・マシーン","Editorial"],["Bedroom Talk","Editorial"],["Lost In My Room","Editorial"],
+["ミックスナッツ","Rejoice"],["Anarchy","ミックスナッツEP / Rejoice"],["Choral A","ミックスナッツEP"],["Subtitle","Rejoice"],["ホワイトノイズ","Rejoice"],["SOULSOUP","Rejoice"],["キャッチボール","Rejoice"],["日常","Rejoice"],["I'm home (interlude)","Rejoice"],["Sharon","Rejoice"],["濁点","Rejoice"],["うらみつらみきわみ","Rejoice"],["Chessboard","Rejoice"],["TATTOO","Rejoice"],["B-Side Blues","Rejoice"],["Finder","Rejoice"],["Get Back To 人生","Rejoice"],
+["Same Blue","Same Blue"],["50%","50%"],["らしさ","らしさ"],["Sanitizer","Sanitizer"],["Make Me Wonder","Make Me Wonder"],["スターダスト","スターダスト / エルダーフラワー"],["エルダーフラワー","スターダスト / エルダーフラワー"]
+].map((x,i)=>({id:i,name:x[0],album:x[1]}));
+
+let selected = [];
+const listEl=document.getElementById('songList');
+const searchEl=document.getElementById('search');
+const countEl=document.getElementById('count');
+const setEl=document.getElementById('setlist');
+const previewEl=document.getElementById('preview');
+
+function renderSongs(){
+  const q=searchEl.value.trim().toLowerCase();
+  listEl.innerHTML='';
+  songs.filter(s=>!q || s.name.toLowerCase().includes(q) || s.album.toLowerCase().includes(q)).forEach(s=>{
+    const row=document.createElement('label'); row.className='song';
+    const cb=document.createElement('input'); cb.type='checkbox'; cb.checked=selected.includes(s.id);
+    cb.addEventListener('change',()=>{
+      if(cb.checked){
+        if(selected.length>=25){cb.checked=false; alert('セトリに入れられるのは最大25曲です！');return;}
+        selected.push(s.id);
+      }else selected=selected.filter(id=>id!==s.id);
+      renderAll();
+    });
+    row.append(cb);
+    const name=document.createElement('div'); name.className='song-name'; name.textContent=s.name;
+    const album=document.createElement('div'); album.className='song-album'; album.textContent=s.album;
+    row.append(name,album); listEl.append(row);
+  });
+  countEl.textContent=`${selected.length} / 25曲 選択中`;
+}
+function selectedSongs(){return selected.map(id=>songs.find(s=>s.id===id)).filter(Boolean)}
+
+function renderSetlist(){
+  const arr=selectedSongs(); setEl.innerHTML='';
+  if(!arr.length){setEl.innerHTML='<div class="empty">上から曲を選ぶと、ここにセトリが表示されます。</div>';return;}
+  arr.forEach((s,i)=>{
+    if(i===arr.length-3 && arr.length>=3){
+      const label=document.createElement('div'); label.className='encore-label'; label.textContent='ENCORE'; setEl.append(label);
+    }
+    const row=document.createElement('div'); row.className='set-row'; row.dataset.index=i;
+    row.innerHTML=`<div class="grip">☷</div><div class="num">${i>=arr.length-3&&arr.length>=3?'EN'+(i-(arr.length-3)+1):String(i+1).padStart(2,'0')}</div><div class="set-title"></div><button class="remove" aria-label="削除">×</button>`;
+    row.querySelector('.set-title').textContent=s.name;
+    row.querySelector('.remove').onclick=()=>{selected=selected.filter(id=>id!==s.id);renderAll()};
+    setupPointerDrag(row);
+    setEl.append(row);
+  });
+}
+let dragIndex=null;
+function setupPointerDrag(row){
+  row.addEventListener('pointerdown',e=>{
+    if(e.target.closest('button'))return;
+    dragIndex=Number(row.dataset.index); row.setPointerCapture(e.pointerId); row.classList.add('dragging');
+  });
+  row.addEventListener('pointermove',e=>{
+    if(dragIndex===null)return;
+    const rows=[...setEl.querySelectorAll('.set-row')];
+    const y=e.clientY;
+    let target=rows.findIndex(r=>{const b=r.getBoundingClientRect();return y<b.top+b.height/2;});
+    if(target<0)target=rows.length-1;
+    if(target!==dragIndex){
+      const moved=selected.splice(dragIndex,1)[0]; selected.splice(target,0,moved); dragIndex=target; renderSetlist(); renderPreview();
+      const newRow=[...setEl.querySelectorAll('.set-row')][target]; if(newRow)newRow.classList.add('dragging');
+    }
+  });
+  row.addEventListener('pointerup',()=>{dragIndex=null;renderSetlist();});
+  row.addEventListener('pointercancel',()=>{dragIndex=null;renderSetlist();});
+}
+function renderPreview(){
+  const arr=selectedSongs();
+  let html='<h3>OFFICIAL HIGE DANDISM</h3><h4>あなたのためのone-man tour</h4>';
+  if(!arr.length) html+='<div class="empty">セトリを作成するとここに表示されます。</div>';
+  else arr.forEach((s,i)=>{
+    if(i===arr.length-3 && arr.length>=3) html+='<div class="p-encore">ENCORE</div>';
+    const n=(i>=arr.length-3&&arr.length>=3)?'EN'+(i-(arr.length-3)+1):String(i+1).padStart(2,'0');
+    html+=`<div class="p-row"><b>${n}</b>　${escapeHtml(s.name)}</div>`;
+  });
+  previewEl.innerHTML=html;
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function renderAll(){renderSongs();renderSetlist();renderPreview()}
+searchEl.addEventListener('input',renderSongs);
+document.getElementById('clearBtn').onclick=()=>{selected=[];renderAll()};
+document.getElementById('randomBtn').onclick=()=>{
+  const shuffled=[...songs].sort(()=>Math.random()-.5).slice(0,25); selected=shuffled.map(s=>s.id); renderAll();
+};
+document.getElementById('shareBtn').onclick=async()=>{
+  const text=selectedSongs().map((s,i)=>`${i+1}. ${s.name}`).join('\\n');
+  const shareText=`Official髭男dism あなたのためのone-man tour\\n\\n${text}`;
+  if(navigator.share){try{await navigator.share({title:'あなたのためのone-man tour',text:shareText})}catch(e){}}
+  else{await navigator.clipboard.writeText(shareText);alert('セトリをコピーしました！')}
+};
+document.getElementById('saveBtn').onclick=()=>{
+  const arr=selectedSongs(); if(!arr.length){alert('まずセトリを作ってね！');return;}
+  const canvas=document.createElement('canvas'); canvas.width=1000; canvas.height=Math.max(900,420+arr.length*48);
+  const c=canvas.getContext('2d'); c.fillStyle='#fff'; c.fillRect(0,0,canvas.width,canvas.height);
+  c.fillStyle='#111'; c.textAlign='center'; c.font='bold 22px sans-serif'; c.fillText('OFFICIAL HIGE DANDISM',500,65);
+  c.font='bold 34px sans-serif'; c.fillText('あなたのためのone-man tour',500,115);
+  c.textAlign='left'; c.font='20px sans-serif';
+  let y=170;
+  arr.forEach((s,i)=>{
+    if(i===arr.length-3&&arr.length>=3){c.font='bold 17px sans-serif';c.textAlign='center';c.fillText('ENCORE',500,y);y+=42;c.textAlign='left';c.font='20px sans-serif';}
+    const n=(i>=arr.length-3&&arr.length>=3)?`EN${i-(arr.length-3)+1}`:String(i+1).padStart(2,'0');
+    c.fillText(`${n}  ${s.name}`,90,y); y+=43;
+  });
+  const a=document.createElement('a');a.download='higedan-one-man-tour-setlist.png';a.href=canvas.toDataURL('image/png');a.click();
+};
+renderAll();
+</script>
+</body>
+</html>
