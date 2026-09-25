@@ -65,9 +65,9 @@ main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
   <section class="card">
     <div class="card-title"><h2>② 楽曲を選ぶ</h2><span>SELECT SONGS</span></div>
     <input id="search" class="search" placeholder="曲名・アルバム名で検索">
-    <div class="toolbar"><div id="count" class="count">0 / 25曲 選択中</div><select id="sortSelect" class="sort-select" aria-label="曲順"><option value="release">リリース順</option><option value="title">アルファベット・五十音順</option></select></div>
+    <div class="toolbar"><div id="count" class="count">0 / 20曲 選択中</div><select id="sortSelect" class="sort-select" aria-label="曲順"><option value="release">リリース順</option><option value="title">アルファベット・五十音順</option></select></div>
     <div id="songList" class="song-list"></div>
-    <div class="notice">楽曲は最大25曲。MC・演出は曲数に含まれない別枠です。選んだ曲は下のセトリ編集欄に追加され、順番はあとから自由に変更できます。</div>
+    <div class="notice">楽曲は最大20曲。MC・演出は曲数に含まれない別枠です。選んだ曲は下のセトリ編集欄に追加され、順番はあとから自由に変更できます。</div>
   </section>
   <section class="card">
     <div class="card-title"><h2>③ MC・演出を入れる</h2><span>OPTIONAL ITEMS</span></div>
@@ -76,7 +76,7 @@ main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
       <div class="custom-label">自由記述</div>
       <div class="custom-row"><input id="customSpecial" class="title-input" maxlength="60" placeholder="例：ここでサプライズ発表！"><button id="addCustomBtn" type="button">＋追加</button></div>
     </div>
-    <div class="small" style="margin-top:10px">入れたいものだけタップして追加できます。MC・演出は25曲とは別枠で、曲と同じように並べ替え・削除できます。</div>
+    <div class="small" style="margin-top:10px">入れたいものだけタップして追加できます。MC・演出は20曲とは別枠で、曲と同じように並べ替え・削除できます。</div>
   </section>
   <section class="card">
     <div class="card-title"><h2>④ セトリを並べ替える</h2><span>SETLIST</span></div>
@@ -117,7 +117,7 @@ const readings={
 'Same Blue':'せいむぶるー','50%':'ごじゅっぱーせんと','らしさ':'らしさ','Sanitizer':'さんいたいざー','Make Me Wonder':'めいくみーわんだー','スターダスト':'すたーだすと','エルダーフラワー':'えるだーふらわー'};
 const titleCollator=new Intl.Collator('ja',{sensitivity:'base',numeric:true});
 function sortedSongs(){const arr=[...songs];if(sortMode==='title')arr.sort((a,b)=>titleCollator.compare(readings[a.name]||a.name,readings[b.name]||b.name));return arr}
-function renderSongs(){const q=searchEl.value.trim().toLowerCase();listEl.innerHTML='';sortedSongs().filter(s=>!q||s.name.toLowerCase().includes(q)||s.album.toLowerCase().includes(q)).forEach(s=>{const row=document.createElement('label');row.className='song';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.includes(s.id);cb.addEventListener('change',()=>{if(cb.checked){if(selected.length>=25){cb.checked=false;alert('セトリに入れられるのは最大25曲です！');return}selected.push(s.id)}else selected=selected.filter(id=>id!==s.id);renderAll()});row.append(cb);const name=document.createElement('div');name.className='song-name';name.textContent=s.name;const album=document.createElement('div');album.className='song-album';album.textContent=s.album;row.append(name,album);listEl.append(row)});countEl.textContent=`${selected.length} / 25曲 選択中`}
+function renderSongs(){const q=searchEl.value.trim().toLowerCase();listEl.innerHTML='';sortedSongs().filter(s=>!q||s.name.toLowerCase().includes(q)||s.album.toLowerCase().includes(q)).forEach(s=>{const row=document.createElement('label');row.className='song';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.includes(s.id);cb.addEventListener('change',()=>{if(cb.checked){if(selected.length>=25){cb.checked=false;alert('セトリに入れられるのは最大20曲です！');return}selected.push(s.id)}else selected=selected.filter(id=>id!==s.id);renderAll()});row.append(cb);const name=document.createElement('div');name.className='song-name';name.textContent=s.name;const album=document.createElement('div');album.className='song-album';album.textContent=s.album;row.append(name,album);listEl.append(row)});countEl.textContent=`${selected.length} / 20曲 選択中`}
 function selectedSongs(){return selected.map(id=>songs.find(s=>s.id===id)).filter(Boolean)}
 const specialItems=['メンバー紹介','MC（軽めのやつ）','MC（盛り上げ系）','MC（泣かせにくる系）','MC（語る系）','チーム髭男の紹介','最後の挨拶','さとし服を脱ぐ'];
 function makeSongItem(id){return {type:'song',id}}
@@ -236,40 +236,37 @@ document.getElementById('saveBtn').onclick=()=>{
   const title=(tourTitleEl.value||'').trim()||'あなたのためのone-man tour';
   const canvas=document.createElement('canvas');
   const W=1200;
-  const headerH=330;
-  const rowH=58;
-  const encoreExtra=90;
-  const footerH=130;
-  const H=Math.max(1200, headerH + arr.length*rowH + encoreExtra + footerH);
+  const headerH=300;
+  const rowH=62;
+  const footerH=95;
+  const H=Math.max(1050, headerH + arr.length*rowH + footerH);
   canvas.width=W; canvas.height=H;
 
   const c=canvas.getContext('2d');
   c.textBaseline='middle';
 
-  // Background: soft poster / stationery feel
+  // 背景：作品っぽい淡い紙質
   const bg=c.createLinearGradient(0,0,W,H);
   bg.addColorStop(0,'#fffdf7');
-  bg.addColorStop(.52,'#f8f5ed');
+  bg.addColorStop(.55,'#f8f5ed');
   bg.addColorStop(1,'#f1f5f1');
   c.fillStyle=bg; c.fillRect(0,0,W,H);
 
-  // Decorative pastel blobs
   function blob(x,y,r,color){
     c.save();
-    c.globalAlpha=.55;
+    c.globalAlpha=.48;
     c.fillStyle=color;
     c.beginPath();
     c.arc(x,y,r,0,Math.PI*2);
     c.fill();
     c.restore();
   }
-  blob(85,90,105,'#dce9e4');
-  blob(W-70,150,120,'#f3dfd8');
-  blob(W-95,H-100,145,'#e8e1c9');
-  blob(80,H-80,95,'#dfe9f2');
+  blob(80,80,110,'#dce9e4');
+  blob(W-80,125,125,'#f3dfd8');
+  blob(W-90,H-75,135,'#e8e1c9');
+  blob(75,H-65,95,'#dfe9f2');
 
-  // Paper panel
-  const panelX=55, panelY=45, panelW=W-110, panelH=H-90;
+  const panelX=55, panelY=42, panelW=W-110, panelH=H-84;
   c.save();
   c.shadowColor='rgba(70,60,45,.10)';
   c.shadowBlur=28;
@@ -278,15 +275,14 @@ document.getElementById('saveBtn').onclick=()=>{
   c.fillRect(panelX,panelY,panelW,panelH);
   c.restore();
 
-  // Header
-  c.fillStyle='#4c5d58';
+  // タイトルを大きく・主役に
   c.textAlign='center';
-  c.font='600 20px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-  c.fillText('OFFICIAL HIGE DANDISM',W/2,92);
+  c.fillStyle='#4c5d58';
+  c.font='700 21px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+  c.fillText('OFFICIAL HIGE DANDISM',W/2,88);
 
-  c.fillStyle='#292824';
-  c.font='700 38px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-  function drawWrappedCenter(text,y,maxWidth,lineHeight){
+  function drawWrappedCenter(text,y,maxWidth,lineHeight,font){
+    c.font=font;
     const chars=[...text];
     let line='', lines=[];
     for(const ch of chars){
@@ -300,52 +296,37 @@ document.getElementById('saveBtn').onclick=()=>{
     lines.forEach((ln,i)=>c.fillText(ln,W/2,y+i*lineHeight));
     return y+(lines.length-1)*lineHeight;
   }
-  const titleBottom=drawWrappedCenter(title,145,860,48);
+
+  c.fillStyle='#24231f';
+  const titleFont='800 48px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+  const titleBottom=drawWrappedCenter(title,142,940,58,titleFont);
 
   c.fillStyle='#8a8379';
-  c.font='500 13px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-  c.fillText('もしも、あなたがセトリを組んだなら。',W/2,titleBottom+45);
+  c.font='500 14px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+  c.fillText('もしも、あなたがセトリを組んだなら。',W/2,titleBottom+48);
 
-  // Animal motifs
-  const members=[['🐨','さとっちゃん'],['🐱','だいちゃん'],['🦍','ならちゃん'],['🐻','ちゃんまつ']];
-  const startX=W/2-180;
-  members.forEach((m,i)=>{
-    const x=startX+i*120;
-    c.fillStyle='#f8f5ed';
-    c.strokeStyle='#ddd6ca';
-    c.lineWidth=1;
-    c.beginPath();
-    c.roundRect(x-48,titleBottom+75,96,58,16);
-    c.fill(); c.stroke();
-    c.font='25px sans-serif'; c.fillText(m[0],x,titleBottom+97);
-    c.fillStyle='#676157';
-    c.font='11px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-    c.fillText(m[1],x,titleBottom+121);
-  });
-
-  // Small divider
-  const contentTop=titleBottom+165;
+  const contentTop=titleBottom+92;
   c.strokeStyle='#d9d2c6';
   c.lineWidth=1;
   c.beginPath(); c.moveTo(105,contentTop); c.lineTo(W-105,contentTop); c.stroke();
 
-  // Section label
-  function sectionLabel(text,y){
+  // SETLIST / ENCORE を同じ位置・同じ見た目で表示
+  function sectionLabel(text,y,accent){
     c.textAlign='left';
-    c.fillStyle='#5f6f69';
-    c.font='700 18px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+    c.fillStyle=accent;
+    c.font='800 22px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
     c.fillText(text,105,y);
-    c.strokeStyle='#b9c9c3';
+    c.strokeStyle=accent;
     c.lineWidth=2;
-    c.beginPath(); c.moveTo(105,y+24); c.lineTo(315,y+24); c.stroke();
+    c.beginPath(); c.moveTo(105,y+28); c.lineTo(310,y+28); c.stroke();
   }
 
   const encoreIdx=encoreSongIndexes(arr);
   let encoreShown=false;
   let songNo=0;
-  let y=contentTop+48;
+  let y=contentTop+55;
 
-  sectionLabel('SETLIST',contentTop+15);
+  sectionLabel('SETLIST',contentTop+16,'#61766f');
 
   function wrapText(text,maxWidth,font){
     c.font=font;
@@ -362,12 +343,9 @@ document.getElementById('saveBtn').onclick=()=>{
 
   arr.forEach((item,i)=>{
     if(item.type==='song' && encoreIdx.includes(i) && !encoreShown){
-      y+=16;
-      c.textAlign='center';
-      c.fillStyle='#a67d78';
-      c.font='700 16px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-      c.fillText('—  ENCORE  —',W/2,y);
-      y+=35;
+      y+=20;
+      sectionLabel('ENCORE',y,'#a86f82');
+      y+=48;
       encoreShown=true;
     }
 
@@ -379,69 +357,60 @@ document.getElementById('saveBtn').onclick=()=>{
       n=enPos>=0?`EN${enPos+1}`:String(songNo).padStart(2,'0');
     }
 
-    // Item background
+    // 曲：グリーン系 / MC・演出・自由記述：ピンク〜ベージュ系
+    const cardFill=isSpecial?'#fff4f1':'#f8fcfa';
+    const cardStroke=isSpecial?'#e7b9b1':'#bfd4cd';
+    const accent=isSpecial?'#c7867d':'#7fa99d';
+    const numberFill=isSpecial?'#a96760':'#5e7f76';
+
     c.save();
-    c.fillStyle=isSpecial?'#faf7ef':'#fffefa';
-    c.strokeStyle=isSpecial?'#ddd4c4':'#e9e3d9';
-    c.lineWidth=1;
+    c.fillStyle=cardFill;
+    c.strokeStyle=cardStroke;
+    c.lineWidth=1.5;
     c.beginPath();
-    c.roundRect(95,y-25,1010,46,13);
+    c.roundRect(95,y-27,1010,50,14);
     c.fill(); c.stroke();
     c.restore();
 
-    // Accent stripe
-    c.fillStyle=isSpecial?'#d9c98e':'#b9cec6';
+    c.fillStyle=accent;
     c.beginPath();
-    c.roundRect(95,y-25,6,46,3);
+    c.roundRect(95,y-27,7,50,3);
     c.fill();
 
     c.textAlign='center';
-    c.fillStyle=isSpecial?'#8f765f':'#777166';
-    c.font=isSpecial?'700 12px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif':'700 13px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-    c.fillText(n,138,y-1);
+    c.fillStyle=numberFill;
+    c.font=isSpecial?'800 13px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif':'800 14px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+    c.fillText(n,140,y-2);
 
-    const nameFont=isSpecial?'500 17px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif':'500 18px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+    const nameFont=isSpecial
+      ? '600 19px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif'
+      : '600 20px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
     const lines=wrapText(item.type==='song'?item.song.name:item.name,900,nameFont);
     c.textAlign='left';
-    c.fillStyle='#302e2a';
+    c.fillStyle=isSpecial?'#6d3f3a':'#282c2a';
     c.font=nameFont;
-    c.fillText(lines[0],180,y-1);
-
-    if(lines.length>1){
-      c.font='500 15px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-      c.fillText(lines[1],180,y+17);
-    }
+    c.fillText(lines[0],185,y-2);
 
     if(isSpecial){
       c.textAlign='right';
-      c.fillStyle='#9b9388';
-      c.font='500 10px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-      c.fillText(item.custom?'CUSTOM':'MC / EVENT',1075,y-1);
+      c.fillStyle='#a46f68';
+      c.font='700 11px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+      c.fillText(item.custom?'自由記述':'MC・演出',1070,y-2);
     }
-
-    y+=rowH + (lines.length>1?10:0);
+    y+=rowH;
   });
 
-  // Footer
-  y+=25;
+  // フッターは必要最低限。指定された文言は入れない
+  y=Math.min(y+12,H-70);
   c.strokeStyle='#d9d2c6';
+  c.lineWidth=1;
   c.beginPath(); c.moveTo(105,y); c.lineTo(W-105,y); c.stroke();
-  y+=40;
+  y+=42;
 
   c.textAlign='center';
-  c.fillStyle='#777166';
-  c.font='500 12px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-  c.fillText(`${songNo}曲  /  MC・演出は曲数に含まれません`,W/2,y);
-
-  y+=34;
-  c.fillStyle='#5c6e68';
-  c.font='600 15px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-  c.fillText('Music makes us happy ♡',W/2,y);
-
-  y+=34;
-  c.fillStyle='#aaa197';
-  c.font='500 10px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-  c.fillText('make your own HIGEDAN night ♡',W/2,y);
+  c.fillStyle='#8a8379';
+  c.font='500 11px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+  c.fillText('OFFICIAL HIGE DANDISM  •  SETLIST MAKER',W/2,y);
 
   const a=document.createElement('a');
   a.download='higedan-fictional-setlist.png';
