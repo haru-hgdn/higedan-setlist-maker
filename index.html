@@ -42,6 +42,7 @@ main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
 .special-badge{font-size:10px;letter-spacing:.08em;color:#9a9388;border:1px solid #d9d1c4;border-radius:999px;padding:3px 7px;white-space:nowrap}
 .p-special{padding:10px 0;border-bottom:1px dashed #ded7cc;color:#5f5a52;font-size:14px}
 @media(max-width:420px){.special-grid{grid-template-columns:1fr 1fr}.special-btn{font-size:12px;padding:10px 8px}}
+.save-poster{font-size:16px;padding:15px 24px;min-height:52px;margin-top:12px;width:100%;}
 </style>
 </head>
 <body>
@@ -82,14 +83,10 @@ main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
     <div class="card-title"><h2>④ セトリを並べ替える</h2><span>SETLIST</span></div>
     <div id="setlist" class="setlist"></div>
     <div class="actions"><button id="clearBtn" class="secondary">全部クリア</button><button id="randomBtn" class="secondary">🎲 とりあえずランダム</button></div>
+    <button id="saveBtn" class="primary save-poster">セトリ画像を保存</button>
     <div class="small" style="margin-top:10px">曲を長押しして上下に動かせます。最後の3曲は自動的にENCOREになります。</div>
   </section>
-  <section class="card">
-    <div class="card-title"><h2>⑤ セトリ画像を作る</h2><span>SETLIST POSTER</span></div>
-    <div class="preview-wrap"><div id="preview" class="preview"></div></div>
-    <div class="actions"><button id="saveBtn">画像として保存</button></div>
-    <div class="small" style="margin-top:10px">完成したセトリを、SNSにも載せやすいポスター風デザインで画像保存できます。</div>
-  </section>
+  
   <div class="footer-note">make your own HIGEDAN night ♡</div>
 </main>
 <script>
@@ -117,7 +114,7 @@ const readings={
 'Same Blue':'せいむぶるー','50%':'ごじゅっぱーせんと','らしさ':'らしさ','Sanitizer':'さんいたいざー','Make Me Wonder':'めいくみーわんだー','スターダスト':'すたーだすと','エルダーフラワー':'えるだーふらわー'};
 const titleCollator=new Intl.Collator('ja',{sensitivity:'base',numeric:true});
 function sortedSongs(){const arr=[...songs];if(sortMode==='title')arr.sort((a,b)=>titleCollator.compare(readings[a.name]||a.name,readings[b.name]||b.name));return arr}
-function renderSongs(){const q=searchEl.value.trim().toLowerCase();listEl.innerHTML='';sortedSongs().filter(s=>!q||s.name.toLowerCase().includes(q)||s.album.toLowerCase().includes(q)).forEach(s=>{const row=document.createElement('label');row.className='song';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.includes(s.id);cb.addEventListener('change',()=>{if(cb.checked){if(selected.length>=25){cb.checked=false;alert('セトリに入れられるのは最大20曲です！');return}selected.push(s.id)}else selected=selected.filter(id=>id!==s.id);renderAll()});row.append(cb);const name=document.createElement('div');name.className='song-name';name.textContent=s.name;const album=document.createElement('div');album.className='song-album';album.textContent=s.album;row.append(name,album);listEl.append(row)});countEl.textContent=`${selected.length} / 20曲 選択中`}
+function renderSongs(){const q=searchEl.value.trim().toLowerCase();listEl.innerHTML='';sortedSongs().filter(s=>!q||s.name.toLowerCase().includes(q)||s.album.toLowerCase().includes(q)).forEach(s=>{const row=document.createElement('label');row.className='song';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.includes(s.id);cb.addEventListener('change',()=>{if(cb.checked){if(selected.length>=20){cb.checked=false;alert('セトリに入れられるのは最大20曲です！');return}selected.push(s.id)}else selected=selected.filter(id=>id!==s.id);renderAll()});row.append(cb);const name=document.createElement('div');name.className='song-name';name.textContent=s.name;const album=document.createElement('div');album.className='song-album';album.textContent=s.album;row.append(name,album);listEl.append(row)});countEl.textContent=`${selected.length} / 20曲 選択中`}
 function selectedSongs(){return selected.map(id=>songs.find(s=>s.id===id)).filter(Boolean)}
 const specialItems=['メンバー紹介','MC（軽めのやつ）','MC（盛り上げ系）','MC（泣かせにくる系）','MC（語る系）','チーム髭男の紹介','最後の挨拶','さとし服を脱ぐ'];
 function makeSongItem(id){return {type:'song',id}}
@@ -204,7 +201,7 @@ function renderPreview(){
     const encoreIdx=encoreSongIndexes(arr); let encoreShown=false; let songNo=0;
     arr.forEach((item,i)=>{
       if(item.type==='song' && encoreIdx.includes(i) && !encoreShown){html+='<div class="p-encore">ENCORE</div>';encoreShown=true}
-      let n='MC';
+      let n='';
       if(item.type==='song'){songNo++;const enPos=encoreIdx.indexOf(i);n=enPos>=0?'EN'+(enPos+1):String(songNo).padStart(2,'0')}
       if(item.type==='special') html+=`<div class="p-special"><b>${n}</b>　${escapeHtml(item.name)}</div>`;
       else html+=`<div class="p-row"><b>${n}</b>　${escapeHtml(item.song.name)}</div>`;
@@ -350,7 +347,7 @@ document.getElementById('saveBtn').onclick=()=>{
     }
 
     const isSpecial=item.type==='special';
-    let n='MC';
+    let n='';
     if(item.type==='song'){
       songNo++;
       const enPos=encoreIdx.indexOf(i);
@@ -377,10 +374,12 @@ document.getElementById('saveBtn').onclick=()=>{
     c.roundRect(95,y-27,7,50,3);
     c.fill();
 
-    c.textAlign='center';
-    c.fillStyle=numberFill;
-    c.font=isSpecial?'800 13px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif':'800 14px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
-    c.fillText(n,140,y-2);
+    if(!isSpecial){
+      c.textAlign='center';
+      c.fillStyle=numberFill;
+      c.font='800 14px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
+      c.fillText(n,140,y-2);
+    }
 
     const nameFont=isSpecial
       ? '600 19px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif'
@@ -389,7 +388,7 @@ document.getElementById('saveBtn').onclick=()=>{
     c.textAlign='left';
     c.fillStyle=isSpecial?'#6d3f3a':'#282c2a';
     c.font=nameFont;
-    c.fillText(lines[0],185,y-2);
+    c.fillText(lines[0],isSpecial?130:185,y-2);
 
     if(isSpecial){
       c.textAlign='right';
