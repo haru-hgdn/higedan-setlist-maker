@@ -411,10 +411,36 @@ document.getElementById('saveBtn').onclick=()=>{
   c.font='500 11px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
   c.fillText('OFFICIAL HIGE DANDISM  •  SETLIST MAKER',W/2,y);
 
-  const a=document.createElement('a');
-  a.download='higedan-fictional-setlist.png';
-  a.href=canvas.toDataURL('image/png');
-  a.click();
+  // PNG画像として表示し、iPhoneでは共有メニューから「画像を保存」できるようにする
+  const pngData=canvas.toDataURL('image/png');
+  const imgWindow=window.open();
+  if(imgWindow){
+    imgWindow.document.write(`
+      <!DOCTYPE html>
+      <html lang="ja">
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>セトリ画像</title>
+        <style>
+          body{margin:0;background:#f4f0e8;text-align:center;padding:12px;font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif}
+          img{display:block;max-width:100%;height:auto;margin:0 auto}
+          p{font-size:13px;color:#6f6a62;line-height:1.6}
+        </style>
+      </head>
+      <body>
+        <p>画像を長押しして「写真に保存」できます📱</p>
+        <img src="${pngData}" alt="セトリ画像">
+      </body>
+      </html>
+    `);
+    imgWindow.document.close();
+  }else{
+    // ポップアップがブロックされた場合は従来どおりPNGをダウンロード
+    const a=document.createElement('a');
+    a.download='higedan-fictional-setlist.png';
+    a.href=pngData;
+    a.click();
+  }
 };
 renderAll();
 </script>
