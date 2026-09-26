@@ -1,20 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
-<head><!-- Google tag (gtag.js) -->
-
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W11NHC49DR"></script>
-
-<script>
-
-  window.dataLayer = window.dataLayer || [];
-
-  function gtag(){dataLayer.push(arguments);}
-
-  gtag('js', new Date());
-
-  gtag('config', 'G-W11NHC49DR');
-
-</script>
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f4f0e8">
@@ -112,7 +98,7 @@ const songs = [
 ["115万キロのフィルム","エスカパレード"],["ノーダウト","エスカパレード"],["ESCAPADE","エスカパレード"],["LADY","エスカパレード"],["たかがアイラブユー","エスカパレード"],["されど日々は","エスカパレード"],["可能性","エスカパレード"],["Tell Me Baby","エスカパレード"],["Second LINE","エスカパレード"],["Driver","エスカパレード"],["相思相愛","エスカパレード"],["ブラザーズ","エスカパレード"],["発明家","エスカパレード"],
 ["イエスタデイ","Traveler"],["宿命","Traveler"],["Amazing","Traveler"],["Rowan","Traveler"],["バッドフォーミー","Traveler"],["最後の恋煩い","Traveler"],["ビンテージ","Traveler"],["Stand By You","Traveler"],["FIRE GROUND","Traveler"],["旅は道連れ","Traveler"],["052519","Traveler"],["Pretender","Traveler"],["ラストソング","Traveler"],["Travelers","Traveler"],
 ["HELLO","Editorial"],["パラボラ","Editorial"],["Laughter","Editorial"],["夏模様の猫","HELLO EP"],["Universe","Editorial"],["Editorial","Editorial"],["アポトーシス","Editorial"],["I LOVE...","Editorial"],["フィラメント","Editorial"],["Cry Baby","Editorial"],["Shower","Editorial"],["みどりの雨避け","Editorial"],["ペンディング・マシーン","Editorial"],["Bedroom Talk","Editorial"],["Lost In My Room","Editorial"],
-["ミックスナッツ","Rejoice"],["Anarchy","ミックスナッツEP / Rejoice"],["Choral A","ミックスナッツEP"],["Subtitle","Rejoice"],["ホワイトノイズ","Rejoice"],["SOULSOUP","Rejoice"],["キャッチボール","Rejoice"],["日常","Rejoice"],["I'm home (interlude)","Rejoice"],["Sharon","Rejoice"],["濁点","Rejoice"],["うらみつらみきわみ","Rejoice"],["Chessboard","Rejoice"],["TATTOO","Rejoice"],["B-Side Blues","Rejoice"],["Finder","Rejoice"],["Get Back To 人生","Rejoice"],
+["ミックスナッツ","Rejoice"],["Anarchy","ミックスナッツEP / Rejoice"],["Choral A","ミックスナッツEP"],["破顔","ミックスナッツEP"],["Subtitle","Rejoice"],["ホワイトノイズ","Rejoice"],["SOULSOUP","Rejoice"],["キャッチボール","Rejoice"],["日常","Rejoice"],["I'm home (interlude)","Rejoice"],["Sharon","Rejoice"],["濁点","Rejoice"],["うらみつらみきわみ","Rejoice"],["Chessboard","Rejoice"],["TATTOO","Rejoice"],["B-Side Blues","Rejoice"],["Finder","Rejoice"],["Get Back To 人生","Rejoice"],
 ["Same Blue","Same Blue"],["50%","50%"],["らしさ","らしさ"],["Sanitizer","Sanitizer"],["Make Me Wonder","Make Me Wonder"],["スターダスト","スターダスト / エルダーフラワー"],["エルダーフラワー","スターダスト / エルダーフラワー"]
 ].map((x,i)=>({id:i,name:x[0],album:x[1]}));
 
@@ -124,13 +110,13 @@ const readings={
 '115万キロのフィルム':'ひゃくじゅうごまんきろのふぃるむ','ノーダウト':'のーだうと','ESCAPADE':'えすかぺーど','LADY':'れでぃー','たかがアイラブユー':'たかがあいらぶゆー','されど日々は':'されどひびは','可能性':'かのうせい','Tell Me Baby':'てるみーべいびー','Second LINE':'せかんどらいん','Driver':'どらいばー','相思相愛':'そうしそうあい','ブラザーズ':'ぶらざーず','発明家':'はつめいか',
 'イエスタデイ':'いえすたでい','宿命':'しゅくめい','Amazing':'あめいじんぐ','Rowan':'ろーわん','バッドフォーミー':'ばっどふぉーみー','最後の恋煩い':'さいごのこいわずらい','ビンテージ':'びんてーじ','Stand By You':'すたんどばいゆー','FIRE GROUND':'ふぁいやーぐらうんど','旅は道連れ':'たびはみちづれ','052519':'ぜろごーにーごーいちきゅう','Pretender':'ぷりてんだー','ラストソング':'らすとそんぐ','Travelers':'とらべらーず',
 'HELLO':'はろー','パラボラ':'ぱらぼら','Laughter':'らふたー','夏模様の猫':'なつもようのねこ','Universe':'ゆにばーす','Editorial':'えでぃとりある','アポトーシス':'あぽとーしす','I LOVE...':'あいらぶ','フィラメント':'ふぃらめんと','Cry Baby':'くらいべいびー','Shower':'しゃわー','みどりの雨避け':'みどりのあまよけ','ペンディング・マシーン':'ぺんでぃんぐましーん','Bedroom Talk':'べっどるーむとーく','Lost In My Room':'ろすといんまいるーむ',
-'ミックスナッツ':'みっくすなっつ','Anarchy':'あなーきー','Choral A':'こーらるえー','Subtitle':'さぶたいとる','ホワイトノイズ':'ほわいとのいず','SOULSOUP':'そうるすーぷ','キャッチボール':'きゃっちぼーる','日常':'にちじょう',"I'm home (interlude)":'あいむほーむ','Sharon':'しゃろん','濁点':'だくてん','うらみつらみきわみ':'うらみつらみきわみ','Chessboard':'ちぇすぼーど','TATTOO':'たとぅー','B-Side Blues':'びーさいどぶるーす','Finder':'ふぁいんだー','Get Back To 人生':'げっとばっくとじんせい',
+'ミックスナッツ':'みっくすなっつ','Anarchy':'あなーきー','Choral A':'こーらるえー','破顔':'はがん','Subtitle':'さぶたいとる','ホワイトノイズ':'ほわいとのいず','SOULSOUP':'そうるすーぷ','キャッチボール':'きゃっちぼーる','日常':'にちじょう',"I'm home (interlude)":'あいむほーむ','Sharon':'しゃろん','濁点':'だくてん','うらみつらみきわみ':'うらみつらみきわみ','Chessboard':'ちぇすぼーど','TATTOO':'たとぅー','B-Side Blues':'びーさいどぶるーす','Finder':'ふぁいんだー','Get Back To 人生':'げっとばっくとじんせい',
 'Same Blue':'せいむぶるー','50%':'ごじゅっぱーせんと','らしさ':'らしさ','Sanitizer':'さんいたいざー','Make Me Wonder':'めいくみーわんだー','スターダスト':'すたーだすと','エルダーフラワー':'えるだーふらわー'};
 const titleCollator=new Intl.Collator('ja',{sensitivity:'base',numeric:true});
 function sortedSongs(){const arr=[...songs];if(sortMode==='title')arr.sort((a,b)=>titleCollator.compare(readings[a.name]||a.name,readings[b.name]||b.name));return arr}
 function renderSongs(){const q=searchEl.value.trim().toLowerCase();listEl.innerHTML='';sortedSongs().filter(s=>!q||s.name.toLowerCase().includes(q)||s.album.toLowerCase().includes(q)).forEach(s=>{const row=document.createElement('label');row.className='song';const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.includes(s.id);cb.addEventListener('change',()=>{if(cb.checked){if(selected.length>=20){cb.checked=false;alert('セトリに入れられるのは最大20曲です！');return}selected.push(s.id)}else selected=selected.filter(id=>id!==s.id);renderAll()});row.append(cb);const name=document.createElement('div');name.className='song-name';name.textContent=s.name;const album=document.createElement('div');album.className='song-album';album.textContent=s.album;row.append(name,album);listEl.append(row)});countEl.textContent=`${selected.length} / 20曲 選択中`}
 function selectedSongs(){return selected.map(id=>songs.find(s=>s.id===id)).filter(Boolean)}
-const specialItems=['メンバー紹介','MC（軽めのやつ）','MC（盛り上げ系）','MC（泣かせにくる系）','MC（語る系）','チーム髭男の紹介','最後の挨拶','さとし服を脱ぐ'];
+const specialItems=['メンバー紹介','MC（軽めのやつ）','MC（盛り上げ系）','MC（泣かせにくる系）','MC（語る系）','チーム髭男の紹介','最後の挨拶','さとし服を脱ぐ','銀テ発射'];
 function makeSongItem(id){return {type:'song',id}}
 function makeSpecialItem(name){return {type:'special',name,id:'sp-'+Date.now()+'-'+Math.random()}}
 function makeCustomItem(name){return {type:'special',name,id:'custom-'+Date.now()+'-'+Math.random(),custom:true}}
@@ -230,7 +216,7 @@ document.getElementById('sortSelect').addEventListener('change',e=>{sortMode=e.t
 tourTitleEl.addEventListener('input',()=>{tourTitle=tourTitleEl.value;renderPreview()});
 document.getElementById('clearBtn').onclick=()=>{selected=[];setItems=[];renderAll()};
 document.getElementById('randomBtn').onclick=()=>{
-  const shuffled=[...songs].sort(()=>Math.random()-.5).slice(0,25);
+  const shuffled=[...songs].sort(()=>Math.random()-.5).slice(0,20);
   selected=shuffled.map(s=>s.id); setItems=selected.map(id=>makeSongItem(id)); renderAll()
 };
 document.getElementById('addCustomBtn').onclick=()=>{
