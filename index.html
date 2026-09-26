@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f4f0e8">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-W11NHC49DR"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-W11NHC49DR');</script>
 <title>もしも、あなたがヒゲダンのセトリを組んだなら。</title>
 <style>
 :root{--bg:#fbfaf6;--paper:#fffefa;--ink:#292824;--muted:#8b877f;--line:#e6e0d6;--soft:#f0ece4;--accent:#4a463f}
@@ -45,17 +43,6 @@ main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
 .p-special{padding:10px 0;border-bottom:1px dashed #ded7cc;color:#5f5a52;font-size:14px}
 @media(max-width:420px){.special-grid{grid-template-columns:1fr 1fr}.special-btn{font-size:12px;padding:10px 8px}}
 .save-poster{font-size:16px;padding:15px 24px;min-height:52px;margin-top:12px;width:100%;}
-
-/* PNG画像表示用：Xなどのアプリ内ブラウザでも同じページ内で表示 */
-.image-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,20,18,.78);padding:18px;overflow:auto;-webkit-overflow-scrolling:touch}
-.image-modal.open{display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
-.image-modal-inner{width:min(100%,700px);margin:auto 0;background:#fffefa;border-radius:18px;padding:12px;box-shadow:0 10px 40px rgba(0,0,0,.25)}
-.image-modal img{display:block;width:100%;height:auto;border-radius:10px;-webkit-touch-callout:default}
-.image-modal-note{text-align:center;font-size:13px;line-height:1.6;color:#6f6a62;padding:8px 4px 4px}
-.image-modal-actions{display:flex;gap:8px;margin-top:8px}
-.image-modal-actions button{flex:1;border:0;border-radius:12px;padding:12px;font-size:14px;font-weight:700;cursor:pointer}
-.image-modal-share{background:#4a463f;color:#fff}
-.image-modal-close{background:#eee9e0;color:#4a463f}
 </style>
 </head>
 <body>
@@ -100,16 +87,6 @@ main{max-width:760px;margin:0 auto;padding:18px 14px 65px}
     <div class="small" style="margin-top:10px">曲を長押しして上下に動かせます。最後の3曲は自動的にENCOREになります。</div>
   </section>
   
-<div id="imageModal" class="image-modal" aria-hidden="true">
-  <div class="image-modal-inner">
-    <img id="generatedImage" alt="生成したセトリ画像">
-    <div class="image-modal-note">画像を長押しして「写真に保存」できます📱<br>うまく出ない場合は「共有する」から保存してね。</div>
-    <div class="image-modal-actions">
-      <button id="shareImageBtn" class="image-modal-share">画像を共有する</button>
-      <button id="closeImageBtn" class="image-modal-close">閉じる</button>
-    </div>
-  </div>
-</div>
   <div class="footer-note">make your own HIGEDAN night ♡</div>
 </main>
 <script>
@@ -434,41 +411,10 @@ document.getElementById('saveBtn').onclick=()=>{
   c.font='500 11px -apple-system,BlinkMacSystemFont,"Helvetica Neue",sans-serif';
   c.fillText('OFFICIAL HIGE DANDISM  •  SETLIST MAKER',W/2,y);
 
-  // Xなどのアプリ内ブラウザでは新しいタブを開く方式が不安定なので、
-  // 同じページ内にPNGを表示します。長押し保存＋共有ボタンに対応。
-  const imageModal=document.getElementById('imageModal');
-  const generatedImage=document.getElementById('generatedImage');
-  const shareImageBtn=document.getElementById('shareImageBtn');
-  const pngBlob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
-  if(!pngBlob){alert('画像の生成に失敗しました。もう一度試してみてね！');return}
-  const imageUrl=URL.createObjectURL(pngBlob);
-  generatedImage.src=imageUrl;
-  imageModal.classList.add('open');
-  imageModal.setAttribute('aria-hidden','false');
-
-  shareImageBtn.onclick=async()=>{
-    try{
-      if(navigator.share){
-        const file=new File([pngBlob],'higedan-fictional-setlist.png',{type:'image/png'});
-        if(!navigator.canShare || navigator.canShare({files:[file]})){
-          await navigator.share({files:[file],title:'髭男セトリメーカー',text:title+' のセトリ'});
-        }else{
-          await navigator.share({title:'髭男セトリメーカー',text:title+' のセトリ'});
-        }
-      }else{
-        alert('このブラウザでは共有機能が使えません。画像を長押しして保存してね📱');
-      }
-    }catch(e){
-      if(e.name!=='AbortError') alert('共有できませんでした。画像を長押しして保存してね📱');
-    }
-  };
-
-  document.getElementById('closeImageBtn').onclick=()=>{
-    imageModal.classList.remove('open');
-    imageModal.setAttribute('aria-hidden','true');
-    setTimeout(()=>URL.revokeObjectURL(imageUrl),300);
-  };
-  imageModal.onclick=e=>{if(e.target===imageModal)document.getElementById('closeImageBtn').click()};
+  const a=document.createElement('a');
+  a.download='higedan-fictional-setlist.png';
+  a.href=canvas.toDataURL('image/png');
+  a.click();
 };
 renderAll();
 </script>
