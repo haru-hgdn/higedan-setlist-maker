@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f4ee">
+<title>今日の髭男ランダムガチャ｜Official髭男dism</title>
+<style>
+:root{
+  --bg:#eef1f4;--paper:#ffffff;--ink:#252a30;--muted:#7b838c;
+  --navy:#25384a;--navy2:#172633;--yellow:#f2c94c;--mint:#65b9a7;
+  --blue:#5d8fb8;--line:#dce1e6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;color:var(--ink);
+ font-family:-apple-system,BlinkMacSystemFont,"Helvetica Neue","Hiragino Kaku Gothic ProN",Meiryo,sans-serif;
+ background:
+ radial-gradient(circle at 8% 10%,rgba(242,201,76,.22) 0 55px,transparent 56px),
+ radial-gradient(circle at 92% 22%,rgba(93,143,184,.16) 0 70px,transparent 71px),
+ linear-gradient(180deg,#f7f8f9 0%,#e9edf1 100%);
+ min-height:100vh;
+}
+header{
+ position:relative;overflow:hidden;text-align:center;padding:34px 18px 30px;
+ background:linear-gradient(135deg,#1c2d3b,#304b61 58%,#253b4d);
+ color:#fff;border-bottom:4px solid var(--yellow);
+}
+header:before{
+ content:"";position:absolute;width:190px;height:190px;border-radius:50%;
+ right:-72px;top:-105px;background:rgba(255,255,255,.06);
+}
+header:after{
+ content:"";position:absolute;width:110px;height:110px;border-radius:50%;
+ left:-48px;bottom:-65px;background:rgba(242,201,76,.08);
+}
+.artist{font-size:10px;letter-spacing:.24em;font-weight:800;color:#dbe4eb}
+h1{font-size:30px;line-height:1.28;margin:9px 0 6px;letter-spacing:.04em}
+.sub{font-size:9px;letter-spacing:.22em;color:#b9c7d2;font-weight:800}
+main{max-width:680px;margin:auto;padding:18px 14px 55px}
+.card{
+ position:relative;background:rgba(255,255,255,.97);border:1px solid var(--line);
+ border-radius:18px;padding:20px 17px;margin-bottom:14px;
+ box-shadow:0 8px 22px rgba(28,43,56,.08);
+}
+.card:before{
+ content:"";position:absolute;left:17px;top:-5px;width:30px;height:10px;
+ background:var(--yellow);border-radius:2px;transform:rotate(-3deg);
+}
+.qhead{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:15px}
+.qtitle{font-size:17px;font-weight:850}
+.qnum{
+ font-size:9px;letter-spacing:.12em;color:#fff;background:var(--navy);
+ padding:5px 8px;border-radius:5px;font-weight:800
+}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.option{
+ appearance:none;width:100%;border:1px solid #d9dfe4;background:#fafbfc;
+ color:var(--ink);border-radius:13px;padding:13px 10px;text-align:left;
+ font-size:14px;cursor:pointer;transition:transform .13s,box-shadow .13s,border-color .13s,background .13s;
+ -webkit-tap-highlight-color:transparent;
+}
+.option:active{transform:scale(.98)}
+.option span{display:block;font-size:22px;margin-bottom:4px}
+.option small{display:block;font-size:12px;color:#626a72;line-height:1.4;font-weight:650}
+.option.selected{
+ border:2px solid var(--navy);padding:12px 9px;background:#eef3f6;
+ box-shadow:0 3px 0 #c3ccd4;transform:translateY(-1px)
+}
+button.main{
+ width:100%;border:0;border-radius:12px;background:var(--navy);
+ color:#fff;padding:16px;font-size:16px;font-weight:850;margin-top:13px;
+ box-shadow:0 5px 0 #101b24;transition:.13s;position:relative;overflow:hidden;
+}
+button.main:before{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(110deg,transparent 20%,rgba(255,255,255,.14) 45%,transparent 70%);
+ transform:translateX(-100%);
+}
+button.main:not(:disabled):active{transform:translateY(4px);box-shadow:0 1px 0 #101b24}
+button.main:disabled{opacity:.38;box-shadow:none}
+button.main.ready:before{animation:shine 2.3s infinite}
+@keyframes shine{to{transform:translateX(100%)}}
+
+.result{display:none}
+.result.show{display:block;animation:pop .4s ease}
+@keyframes pop{0%{opacity:0;transform:translateY(12px) scale(.98)}100%{opacity:1;transform:none}}
+.result-head{text-align:center;padding:8px 3px 20px}
+.result-head .eyebrow{
+ display:inline-block;font-size:9px;letter-spacing:.18em;color:#fff;
+ background:var(--mint);padding:5px 9px;border-radius:4px;font-weight:850
+}
+.result-head h2{font-size:23px;line-height:1.45;margin:11px 0 6px}
+.theme{font-size:13px;line-height:1.8;color:#66707a}
+.songs{margin-top:8px}
+.song{
+ display:flex;align-items:center;gap:11px;padding:13px 5px;
+ border-bottom:1px dashed #dfe4e8
+}
+.song:first-child{border-top:1px dashed #dfe4e8}
+.no{
+ width:34px;height:34px;display:grid;place-items:center;border-radius:50%;
+ background:#e9eef2;color:#334554;font-size:10px;font-weight:900;flex:none
+}
+.song:first-child .no{background:var(--yellow);color:#4c4018}
+.name{font-size:15px;font-weight:750;flex:1}
+.album{font-size:10px;color:#99a0a7}
+
+.first{
+ margin-top:18px;padding:18px;border-radius:15px;
+ background:linear-gradient(135deg,#f5f7f8,#e7eef2);
+ border:1px solid #d5dfe5;text-align:center;
+}
+.first .label{font-size:9px;letter-spacing:.18em;color:#5f7889;font-weight:850}
+.first .songname{font-size:23px;font-weight:900;margin:7px 0}
+.first .message{font-size:12px;color:#65717a}
+.actions{display:flex;gap:8px;margin-top:12px}
+.actions button{
+ flex:1;padding:12px;border-radius:11px;border:1px solid #d5dce2;
+ background:#fff;color:#46515b;font-weight:750
+}
+.actions button:active{transform:scale(.98)}
+.note{text-align:center;color:#8d969e;font-size:10px;line-height:1.7;margin-top:18px}
+
+/* Gacha overlay */
+.gacha-overlay{
+ position:fixed;inset:0;z-index:1000;display:none;place-items:center;
+ background:rgba(16,28,38,.84);backdrop-filter:blur(5px);
+ padding:20px;
+}
+.gacha-overlay.show{display:grid}
+.gacha-box{text-align:center;color:#fff;width:min(360px,100%)}
+.gacha-title{font-size:14px;letter-spacing:.18em;font-weight:850;margin-bottom:18px}
+.machine{
+ position:relative;width:235px;height:290px;margin:auto;
+}
+.machine-top{
+ position:absolute;left:42px;top:0;width:151px;height:92px;
+ border-radius:80px 80px 25px 25px;background:linear-gradient(135deg,#526b7b,#253b4b);
+ border:5px solid #aebbc4;box-shadow:0 9px 0 #0f1c25;
+}
+.globe{
+ position:absolute;left:25px;top:12px;width:91px;height:68px;border-radius:50%;
+ background:radial-gradient(circle at 35% 30%,#fff 0 3px,transparent 4px),
+ radial-gradient(circle at 70% 55%,#6fc1ad 0 12px,transparent 13px),
+ radial-gradient(circle at 38% 68%,#f0c84b 0 11px,transparent 12px),
+ #dbe6eb;border:3px solid #fff;overflow:hidden;
+}
+.globe:after{content:"✦  ♪  ♡  ✧";position:absolute;left:10px;top:21px;font-size:13px;color:#385468;letter-spacing:4px}
+.cap{position:absolute;right:14px;top:18px;width:26px;height:20px;background:#f2c94c;border-radius:4px 7px 7px 4px}
+.machine-body{
+ position:absolute;left:20px;top:82px;width:195px;height:180px;
+ background:linear-gradient(90deg,#344c5e,#253a4b);border:5px solid #aebbc4;
+ border-radius:18px;box-shadow:0 10px 0 #0f1c25;
+}
+.slot{
+ position:absolute;left:31px;top:21px;width:123px;height:48px;border-radius:9px;
+ background:#172832;border:3px solid #8093a1;display:grid;place-items:center;
+ color:#f2c94c;font-weight:900;letter-spacing:.08em;font-size:12px;
+}
+.handle{
+ position:absolute;right:14px;top:76px;width:35px;height:75px;
+ border-radius:20px;background:#b7c2ca;border:3px solid #e5eaed;
+}
+.handle:after{
+ content:"";position:absolute;left:5px;top:7px;width:19px;height:19px;border-radius:50%;
+ background:#f2c94c;box-shadow:0 35px 0 #f2c94c;
+}
+.dispense{
+ position:absolute;left:38px;bottom:17px;width:112px;height:42px;border-radius:9px;
+ background:#111e27;border:3px solid #788d9c;color:#fff;display:grid;place-items:center;
+ font-size:10px;letter-spacing:.13em
+}
+.capsule{
+ position:absolute;left:84px;bottom:-30px;width:67px;height:50px;border-radius:50%;
+ background:linear-gradient(#f2c94c 0 50%,#fff 50%);border:4px solid #e9edf0;
+ box-shadow:0 7px 0 rgba(0,0,0,.25);opacity:0
+}
+.capsule.show{animation:capsulePop .7s .15s both}
+@keyframes capsulePop{
+ 0%{opacity:0;transform:translateY(-80px) scale(.4) rotate(-20deg)}
+ 55%{opacity:1;transform:translateY(8px) scale(1.12) rotate(8deg)}
+ 100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}
+}
+.machine.spinning .globe{animation:spin .45s linear infinite}
+.machine.spinning .handle{animation:lever .55s ease-in-out infinite alternate}
+.machine.spinning{animation:shake .18s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes lever{to{transform:rotate(16deg);transform-origin:top center}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px) rotate(-1deg)}75%{transform:translateX(3px) rotate(1deg)}}
+.gacha-status{font-size:13px;margin-top:25px;font-weight:700;color:#e9eef2;min-height:20px}
+.gacha-sub{font-size:10px;color:#b9c5cd;margin-top:8px}
+
+@media(max-width:420px){
+ h1{font-size:27px}
+ .options{gap:7px}
+ .option{padding:12px 8px}
+ .album{display:none}
+ .machine{transform:scale(.92);margin-top:-5px;margin-bottom:-5px}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="artist">Official髭男dism</div>
+  <h1>🎧 今日の髭男<br>ランダムガチャ</h1>
+  <div class="sub">TODAY'S HIGEDAN RANDOM GACHA</div>
+</header>
+
+<main>
+  <section class="card">
+    <div class="qhead"><div class="qtitle">今の気分は？</div><div class="qnum">01 / MOOD</div></div>
+    <div class="options" id="moodOptions"></div>
+  </section>
+
+  <section class="card">
+    <div class="qhead"><div class="qtitle">どの時代のヒゲダンに会いたい？</div><div class="qnum">02 / ERA</div></div>
+    <div class="options" id="eraOptions"></div>
+  </section>
+
+  <section class="card">
+    <div class="qhead"><div class="qtitle">今日はどんな時間にしたい？</div><div class="qnum">03 / SCENE</div></div>
+    <div class="options" id="sceneOptions"></div>
+    <button class="main" id="resultBtn" disabled>🎰 ガチャを回す！</button>
+  </section>
+
+  <section class="card result" id="result">
+    <div class="result-head">
+      <div class="eyebrow">YOUR HIGEDAN TODAY</div>
+      <h2 id="themeTitle"></h2>
+      <div class="theme" id="themeText"></div>
+    </div>
+    <div class="songs" id="songs"></div>
+    <div class="first">
+      <div class="label">TODAY'S 1ST SONG</div>
+      <div class="songname" id="firstSong"></div>
+      <div class="message" id="message"></div>
+    </div>
+    <div class="actions">
+      <button id="retryBtn">もう一度やってみる</button>
+      <button id="topBtn">質問に戻る</button>
+    </div>
+  </section>
+
+  <div class="note">
+    Official髭男dismのファンによる非公式・個人制作コンテンツです。<br>
+    楽曲の分類は「今日のヒゲダン」用の個人的なイメージによるものです。
+  </div>
+</main>
+
+<script>
+const songs = [
+["SWEET TWEET","🐣",["🔥","💪"],["🚶","🚗"]],
+["恋の前ならえ","🐣",["💭","🥹"],["🌙","🚶"]],
+["夕暮れ沿い","🐣",["🥹","💭"],["🌙","🚶","🛋️"]],
+["雪急く朝が来る","🐣",["🥹","💭"],["🌙","🚶"]],
+["始発が導く幸福論","🐣",["💪","💭"],["🚶","🚗"]],
+["愛なんだが…","🐣",["💭","🥹"],["🌙","🚶"]],
+["parade","🐣",["🔥","💪"],["🚶","🚗"]],
+["ダーリン。","🐣",["🥹","💭"],["🌙","🛋️"]],
+["Clap Clap","🐣",["🔥","💪"],["🚶","🚗"]],
+["コーヒーとシロップ","🐣",["💭","💪"],["🌙","🚶"]],
+["Happy Birthday To You","🐣",["💪","🔥"],["🚶","🚗"]],
+["恋の去り際","🐣",["🥹","💭"],["🌙","🚶","🛋️"]],
+["ゼロのままでいられたら","🐣",["🥹","💭"],["🌙","🛋️"]],
+["日曜日のラブレター","🐣",["🥹","💭"],["🌙","🚶","🛋️"]],
+["What's Going On?","🐣",["🔥","💪"],["🚶","🚗"]],
+["未完成なままで","🐣",["🥹","💭"],["🌙","🛋️"]],
+["ニットの帽子","🐣",["💭","🥹"],["🌙","🛋️"]],
+["黄色い車","🐣",["💭","🔥"],["🚶","🚗"]],
+["始まりの朝","🐣",["💪","💭"],["🚶","🚗"]],
+["犬かキャットかで死ぬまで喧嘩しよう!","🐣",["🔥","💪"],["🚶","🚗"]],
+["異端なスター","🐣",["💪","🔥","💭"],["🚶","🚗"]],
+["55","🐣",["🔥","💪"],["🚶","🚗"]],
+["Rolling","🐣",["🔥","💪"],["🚶","🚗"]],
+["イコール","🐣",["💭","🥹"],["🌙","🚶"]],
+["Trailer","🐣",["💭"],["🌙","🚗"]],
+["115万キロのフィルム","🐣",["🥹","💭"],["🌙","🚗","🛋️"]],
+["ノーダウト","🚀",["🔥"],["🚶","🚗"]],
+["ESCAPADE","🐣",["🔥"],["🚶","🚗"]],
+["LADY","🚀",["🥹","💭"],["🌙","🚶"]],
+["たかがアイラブユー","🚀",["🥹","💭"],["🌙","🚶","🛋️"]],
+["されど日々は","🚀",["💪","💭"],["🚶","🚗"]],
+["可能性","🚀",["🔥","💪"],["🚶","🚗"]],
+["Tell Me Baby","🐣",["🔥"],["🚶","🚗"]],
+["Second LINE","🚀",["🔥","💭"],["🚶","🚗"]],
+["Driver","🚀",["🔥","💪"],["🚗"]],
+["相思相愛","🚀",["🥹","💭"],["🌙","🚶"]],
+["ブラザーズ","🚀",["🔥","💪"],["🚶","🚗"]],
+["発明家","🚀",["💪","🔥"],["🚶","🚗"]],
+["イエスタデイ","🚀",["🥹","💭"],["🌙","🚶"]],
+["宿命","🚀",["🔥","💪"],["🚶","🚗"]],
+["Amazing","🚀",["🔥","💪"],["🚶","🚗"]],
+["Rowan","🚀",["💭","🥹"],["🌙","🚶"]],
+["バッドフォーミー","🚀",["🥹","🔥"],["🌙","🚶","🚗"]],
+["最後の恋煩い","🚀",["🥹","💭"],["🌙","🚶"]],
+["ビンテージ","🚀",["💭","🥹"],["🌙","🚶","🛋️"]],
+["Stand By You","🚀",["💪","🔥"],["🚶","🚗"]],
+["FIRE GROUND","🐣",["🔥","💪"],["🚶","🚗"]],
+["旅は道連れ","🚀",["💪","🔥"],["🚗"]],
+["052519","🚀",["💭"],["🚗","🛋️"]],
+["Pretender","🚀",["🥹","💭"],["🌙","🚶","🛋️"]],
+["ラストソング","🚀",["🥹","💭"],["🌙","🛋️"]],
+["Travelers","🚀",["💭","💪"],["🚗"]],
+["HELLO","🚀",["🔥","💪"],["🚶","🚗"]],
+["パラボラ","🚀",["💪","💭"],["🚶","🚗"]],
+["Laughter","🚀",["🥹","💪"],["🌙","🚗","🛋️"]],
+["夏模様の猫","🚀",["💭","🥹"],["🌙","🚶","🛋️"]],
+["Universe","🚀",["💪","🔥"],["🚶","🚗"]],
+["Editorial","🚀",["💭"],["🌙","🛋️"]],
+["アポトーシス","🚀",["🥹","💭"],["🌙","🛋️"]],
+["I LOVE...","🚀",["🥹","💭"],["🌙","🚶"]],
+["フィラメント","🚀",["🥹","💭"],["🌙","🛋️"]],
+["Cry Baby","🚀",["🔥","💪"],["🚶","🚗"]],
+["Shower","🚀",["🥹","💭"],["🌙","🛋️"]],
+["みどりの雨避け","🚀",["💭","🥹"],["🌙","🚶","🛋️"]],
+["ペンディング・マシーン","🚀",["🔥","💭"],["🚶","🚗"]],
+["Bedroom Talk","🚀",["💭","🥹"],["🌙","🛋️"]],
+["Lost In My Room","🚀",["🥹","💭"],["🌙","🛋️"]],
+["ミックスナッツ","🚀",["🔥"],["🚶","🚗"]],
+["Anarchy","💫",["🔥","💭"],["🚶","🚗"]],
+["Choral A","💫",["💭","🥹"],["🌙","🛋️"]],
+["破顔","💫",["🥹","💭"],["🌙","🛋️"]],
+["Subtitle","🚀",["🥹","💭"],["🌙","🚶","🛋️"]],
+["ホワイトノイズ","🚀",["🔥","💪"],["🚶","🚗"]],
+["SOULSOUP","💫",["🔥","💪"],["🚶","🚗"]],
+["キャッチボール","💫",["🥹","💭"],["🌙","🚶","🛋️"]],
+["日常","💫",["🥹","💭"],["🌙","🚶","🛋️"]],
+["I'm home (interlude)","💫",["💭"],["🌙","🛋️"]],
+["Sharon","💫",["🥹","💭"],["🌙","🚶","🛋️"]],
+["濁点","💫",["🔥","💭"],["🚶","🚗"]],
+["うらみつらみきわみ","💫",["🔥","💭"],["🚶","🚗"]],
+["Chessboard","💫",["🥹","💭"],["🌙","🚶","🛋️"]],
+["TATTOO","💫",["💭","💪"],["🚶","🚗"]],
+["B-Side Blues","💫",["🔥"],["🚶","🚗"]],
+["Finder","💫",["💭","🔥"],["🚶","🚗"]],
+["Get Back To 人生","💫",["💪","🔥"],["🚶","🚗"]],
+["Same Blue","💫",["🥹","💭"],["🌙","🚶"]],
+["50%","🎶",["💭","🥹"],["🌙","🚶","🛋️"]],
+["らしさ","🎶",["💪","🔥"],["🚶","🚗"]],
+["Sanitizer","🎶",["🔥"],["🚶","🚗"]],
+["Make Me Wonder","🎶",["🔥","💭"],["🚶","🚗"]],
+["スターダスト","🎶",["🥹","💭"],["🌙","🚶","🛋️"]],
+["エルダーフラワー","🎶",["🥹","💭"],["🌙","🚶"]]
+].map((x,i)=>({id:i,name:x[0],era:x[1],mood:x[2],scene:x[3]}));
+
+const questions={
+mood:[
+["🥹","しっとりしたい","🥹"],["🔥","アガりたい","🔥"],
+["💭","浸りたい","💭"],["💪","元気を出したい","💪"]
+],
+era:[
+["🐣","はじまりのヒゲダン","🐣"],["🚀","駆け上がるヒゲダン","🚀"],
+["💫","深みを増したヒゲダン","💫"],["🎶","最新のヒゲダン","🎶"]
+],
+scene:[
+["🌙","ひとりで浸りたい","🌙"],["🚶","歩きながら聴きたい","🚶"],
+["🚗","移動のお供にしたい","🚗"],["🛋️","何も考えずゆっくりしたい","🛋️"]
+]
+};
+let answers={mood:null,era:null,scene:null};
+
+function renderOptions(id,key){
+  const el=document.getElementById(id);
+  questions[key].forEach(([emoji,label,value])=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerHTML=`<span>${emoji}</span><small>${label}</small>`;
+    b.onclick=()=>{
+      answers[key]=value;
+      [...el.children].forEach(x=>x.classList.remove("selected"));
+      b.classList.add("selected");
+      updateButton();
+    };
+    el.appendChild(b);
+  });
+}
+renderOptions("moodOptions","mood");
+renderOptions("eraOptions","era");
+renderOptions("sceneOptions","scene");
+
+function updateButton(){
+  const btn=document.getElementById("resultBtn");
+  const ready=!!(answers.mood&&answers.era&&answers.scene);
+  btn.disabled=!ready;
+  btn.classList.toggle("ready",ready);
+}
+
+function shuffle(arr){
+  return [...arr].sort(()=>Math.random()-.5);
+}
+
+function pickSongs(){
+  const {mood,era,scene}=answers;
+  const unused=new Set(songs.map(s=>s.id));
+  const score=s=>(
+    (s.era===era?6:0)+
+    (s.mood.includes(mood)?3:0)+
+    (s.scene.includes(scene)?3:0)
+  );
+  const pool=[...songs].sort((a,b)=>score(b)-score(a));
+  const chosen=[];
+  while(chosen.length<5){
+    const candidates=shuffle(pool.filter(s=>unused.has(s.id)));
+    const topScore=score(candidates[0]);
+    const good=candidates.filter(s=>score(s)>=topScore-2);
+    const pick=good[Math.floor(Math.random()*good.length)]||candidates[0];
+    chosen.push(pick);
+    unused.delete(pick.id);
+  }
+  return chosen;
+}
+
+function themeFor(){
+  const mood={
+    "🥹":"少し立ち止まって、心をゆっくりほどく時間",
+    "🔥":"気分を上向きにして、思いっきり楽しむ時間",
+    "💭":"音楽の中に少し深く入り込む時間",
+    "💪":"ヒゲダンからちょっと元気をもらう時間"
+  }[answers.mood];
+  const scene={
+    "🌙":"夜にひとり",
+    "🚶":"歩きながら",
+    "🚗":"移動しながら",
+    "🛋️":"何も考えずゆっくり"
+  }[answers.scene];
+  return `${scene}、${mood}`;
+}
+
+function renderResult(){
+  const chosen=pickSongs();
+  document.getElementById("themeTitle").textContent=themeFor();
+  document.getElementById("themeText").textContent="今日のあなたに寄り添う5曲を、ヒゲダンのいろんな時代から選びました。";
+  const el=document.getElementById("songs");
+  el.innerHTML="";
+  chosen.forEach((s,i)=>{
+    const row=document.createElement("div");
+    row.className="song";
+    row.innerHTML=`<div class="no">${String(i+1).padStart(2,"0")}</div><div class="name">${s.name}</div><div class="album">${s.era}</div>`;
+    el.appendChild(row);
+  });
+  document.getElementById("firstSong").textContent=chosen[0].name;
+  document.getElementById("message").textContent=
+    answers.mood==="🔥"?"今日はこの曲から、思いっきりいこう。":
+    answers.mood==="💪"?"今日はこの曲から、ちょっと元気をもらおう。":
+    answers.mood==="🥹"?"今日はこの曲から、ゆっくりどうぞ。":
+    "今日はこの曲から、ヒゲダンの世界に浸ってみて。";
+  document.getElementById("result").classList.add("show");
+  document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function playGacha(){
+  const overlay=document.getElementById("gachaOverlay");
+  const machine=document.getElementById("machine");
+  const capsule=document.getElementById("capsule");
+  const status=document.getElementById("gachaStatus");
+  const dispense=document.querySelector(".dispense");
+  overlay.classList.add("show");
+  machine.classList.add("spinning");
+  capsule.classList.remove("show");
+  status.textContent="ガチャを回しています…";
+  dispense.textContent="SPINNING...";
+  setTimeout(()=>{status.textContent="ヒゲダンを抽選中…";},650);
+  setTimeout(()=>{status.textContent="カプセルが出てきた！";},1250);
+  setTimeout(()=>{
+    machine.classList.remove("spinning");
+    capsule.classList.add("show");
+    dispense.textContent="GET!";
+  },1450);
+  setTimeout(()=>{
+    overlay.classList.remove("show");
+    renderResult();
+  },2250);
+}
+document.getElementById("resultBtn").onclick=playGacha;
+document.getElementById("retryBtn").onclick=playGacha;
+document.getElementById("topBtn").onclick=()=>{
+  document.querySelector("main").scrollIntoView({behavior:"smooth",block:"start"});
+};
+</script>
+
+<div class="gacha-overlay" id="gachaOverlay">
+  <div class="gacha-box">
+    <div class="gacha-title">🎰 TODAY'S HIGEDAN GACHA</div>
+    <div class="machine" id="machine">
+      <div class="machine-top"><div class="globe"></div><div class="cap"></div></div>
+      <div class="machine-body">
+        <div class="slot">HIGEDAN</div>
+        <div class="handle"></div>
+        <div class="dispense">LOADING...</div>
+      </div>
+      <div class="capsule" id="capsule"></div>
+    </div>
+    <div class="gacha-status" id="gachaStatus">ガチャを回しています…</div>
+    <div class="gacha-sub">あなたの今日にぴったりの5曲を抽選中</div>
+  </div>
+</div>
+</body>
+</html>
