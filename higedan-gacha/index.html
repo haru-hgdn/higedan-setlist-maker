@@ -2,35 +2,41 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffd84d">
 <title>Official髭男dism ランダムガチャ</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;color:#20243a;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:linear-gradient(135deg,#fff8e7 0%,#fff0f7 48%,#eaf5ff 100%);min-height:100vh;overflow-x:hidden}
-body:before,body:after{content:"✦  ✧  ★  ✦  ✧  ★  ✦";position:fixed;z-index:-1;color:#f59e0b;font-size:28px;letter-spacing:14px;opacity:.18;pointer-events:none;white-space:nowrap}
-body:before{top:8%;left:-40px;transform:rotate(-8deg)}body:after{bottom:10%;right:-50px;transform:rotate(7deg);color:#ec4899}
-.app{max-width:680px;min-height:100vh;margin:auto;padding:28px 16px 40px;text-align:center}
-.logo{color:#7c3aed;font-size:12px;font-weight:900;letter-spacing:.15em;margin:8px 0 16px}
-h1{font-size:clamp(30px,8vw,45px);line-height:1.12;margin:0 0 10px;color:#25213b}.sub{color:#6b7280;font-size:13px;margin-bottom:22px}
-.machine{width:280px;height:360px;margin:0 auto 20px;position:relative;filter:drop-shadow(0 18px 24px rgba(124,58,237,.18))}
-.top{position:absolute;left:28px;top:0;width:224px;height:82px;background:linear-gradient(135deg,#7c3aed,#ec4899);border:5px solid #fff;border-radius:50% 50% 18px 18px;box-shadow:0 7px 0 rgba(124,58,237,.25)}
-.glass{position:absolute;left:42px;top:38px;width:196px;height:190px;background:linear-gradient(145deg,#fff7ed,#fce7f3);border:6px solid #fff;border-radius:50% 50% 24px 24px;overflow:hidden;box-shadow:inset 0 0 30px rgba(236,72,153,.12)}
-.glass:before{content:"✦";position:absolute;left:25px;top:25px;color:#f59e0b;font-size:22px;animation:twinkle 1.2s infinite alternate}.glass:after{content:"✧";position:absolute;right:25px;top:55px;color:#7c3aed;font-size:25px;animation:twinkle .9s infinite alternate-reverse}
-.globe{position:absolute;width:110px;height:110px;left:38px;top:25px;border-radius:50%;background:linear-gradient(145deg,#fcd34d,#fb7185);border:5px solid #fff;box-shadow:inset -15px -15px rgba(190,24,93,.14)}
-.capsule{position:absolute;width:38px;height:38px;left:78px;top:106px;border-radius:50%;background:#60a5fa;border:3px solid #fff;box-shadow:0 5px 12px rgba(59,130,246,.3)}
-.body{position:absolute;left:28px;top:190px;width:224px;height:130px;background:linear-gradient(145deg,#6d28d9,#db2777);border:5px solid #fff;border-radius:8px 8px 28px 28px;box-shadow:0 8px 0 rgba(124,58,237,.25)}
-.slot{position:absolute;left:70px;top:25px;width:84px;height:10px;background:#312e81;border-radius:20px}.knob{position:absolute;right:32px;top:48px;width:40px;height:40px;border-radius:50%;background:#fcd34d;border:4px solid #fff;box-shadow:0 5px 0 #d97706}.handle{position:absolute;right:0;top:74px;width:45px;height:9px;background:#fff;border-radius:10px;transform:rotate(70deg);transform-origin:left}.tray{position:absolute;left:70px;bottom:4px;width:140px;height:40px;background:#312e81;border:5px solid #fff;border-radius:0 0 18px 18px}
-button{border:0;border-radius:999px;padding:15px 23px;font-weight:900;font-size:16px;cursor:pointer;transition:.2s;box-shadow:0 7px 15px rgba(30,41,59,.13)}button:active{transform:translateY(2px)}
-.main{background:linear-gradient(90deg,#fbbf24,#fb7185,#a855f7);color:white;padding:16px 28px;font-size:17px}.main:hover{transform:translateY(-2px) scale(1.02)}
-.gacha5{margin-top:11px;background:white;color:#7c3aed;border:2px solid #c4b5fd;padding:13px 24px}.gacha5:hover{transform:translateY(-2px)}
+:root{--ink:#17171b;--yellow:#ffd84d;--pink:#ff8fae;--mint:#75e0c1;--blue:#7db7ff;--paper:#fffdf7}
+body{margin:0;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:radial-gradient(circle at 10% 5%,#fff3a8 0 10%,transparent 28%),radial-gradient(circle at 90% 20%,#ffbfd0 0 9%,transparent 26%),radial-gradient(circle at 20% 90%,#baf4e5 0 9%,transparent 25%),linear-gradient(135deg,#fff9d9,#f7f1ff 48%,#e9fbff);min-height:100vh}
+body:before{content:"✦  ✧  ★  ✦  ✧  ★  ✦";position:fixed;inset:8px 0 auto;text-align:center;font-size:18px;letter-spacing:18px;color:#fff;opacity:.8;pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;max-width:680px;min-height:100vh;margin:auto;padding:26px 16px 40px;text-align:center}
+.logo{display:inline-block;background:#17171b;color:#fff;padding:7px 12px;border-radius:999px;font-size:10px;font-weight:900;letter-spacing:.16em;margin:3px 0 16px;box-shadow:4px 4px 0 #fff}
+h1{font-size:clamp(29px,8vw,44px);line-height:1.12;margin:0 0 9px;font-weight:1000;letter-spacing:-.03em}.sub{font-size:13px;font-weight:700;margin-bottom:18px}
+.home-card{background:#ffffffd9;border:3px solid #17171b;border-radius:32px;padding:20px 14px 24px;box-shadow:8px 9px 0 #17171b}
+.machine{width:280px;height:360px;margin:2px auto 14px;position:relative;filter:drop-shadow(0 10px 0 rgba(23,23,27,.12))}
+.top{position:absolute;left:28px;top:0;width:224px;height:82px;background:linear-gradient(#ffcf4c,#ff9d72);border:5px solid #17171b;border-radius:50% 50% 18px 18px;z-index:2}
+.top:after{content:"★";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:30px;color:#fff}
+.glass{position:absolute;left:42px;top:38px;width:196px;height:190px;background:linear-gradient(145deg,#8debd2,#75bfff);border:5px solid #17171b;border-radius:50% 50% 24px 24px;overflow:hidden;z-index:1}
+.glass:before{content:"";position:absolute;inset:12px;border:3px dashed #ffffffaa;border-radius:50%;animation:orbit 1.8s linear infinite}
+.globe{position:absolute;width:110px;height:110px;left:38px;top:25px;border-radius:50%;background:radial-gradient(circle at 32% 27%,#fff8b4 0 10%,transparent 11%),linear-gradient(135deg,#ffe56c,#ffbd4a);border:5px solid #17171b;box-shadow:inset -14px -14px 0 #e39a3a;animation:glow 1.1s ease-in-out infinite alternate}
+.capsule{position:absolute;width:38px;height:38px;left:78px;top:106px;border-radius:50%;background:linear-gradient(135deg,#ff8faf 50%,#9c82ff 50%);border:3px solid #17171b;transform:rotate(15deg);z-index:3}
+.body{position:absolute;left:28px;top:190px;width:224px;height:130px;background:linear-gradient(135deg,#9d83ff,#ff8fb1 55%,#ffcf4d);border:5px solid #17171b;border-radius:8px 8px 28px 28px;z-index:3}
+.slot{position:absolute;left:65px;top:23px;width:94px;height:12px;background:#17171b;border-radius:20px}.slot:after{content:"";position:absolute;left:13px;top:3px;width:68px;height:5px;background:#fff;border-radius:10px;opacity:.45}
+.knob{position:absolute;right:29px;top:48px;width:42px;height:42px;border-radius:50%;background:var(--yellow);border:4px solid #17171b;box-shadow:0 6px 0 #17171b}.handle{position:absolute;right:0;top:72px;width:48px;height:10px;background:#fff;border:4px solid #17171b;border-radius:10px;transform:rotate(70deg);transform-origin:left center}
+.tray{position:absolute;left:68px;bottom:3px;width:144px;height:41px;background:#ffcf4d;border:5px solid #17171b;border-radius:0 0 20px 20px;z-index:4}.tray:after{content:"✦  ✦  ✦";font-size:11px;letter-spacing:5px}
+.spin .knob{animation:knobTurn .32s linear 8}.spin .handle{animation:handleMove .64s ease-in-out 4}.spin .globe{animation:globeFlash .28s linear 9}.spin .capsule{animation:capsuleBounce .42s ease-in-out 6}.spin .glass:before{animation:orbit .55s linear 11}
+@keyframes knobTurn{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}
+@keyframes handleMove{0%,100%{transform:rotate(70deg)}45%{transform:rotate(105deg)}60%{transform:rotate(70deg)}}
+@keyframes globeFlash{0%,100%{filter:brightness(1)}50%{filter:brightness(1.55)}}
+@keyframes capsuleBounce{0%,100%{transform:translateY(0) rotate(15deg)}50%{transform:translateY(-24px) rotate(195deg)}}
+@keyframes orbit{to{transform:rotate(360deg)}}
+@keyframes glow{to{box-shadow:inset -14px -14px 0 #e39a3a,0 0 18px #fff}} 
+.buttons{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px}button{border:3px solid #17171b;border-radius:999px;padding:14px 19px;font-weight:1000;font-size:15px;cursor:pointer;box-shadow:4px 5px 0 #17171b}.main{background:var(--yellow);color:#17171b}.five{background:#ff91b0}.main:active,.five:active,.again:active{transform:translate(3px,4px);box-shadow:1px 1px 0 #17171b}
 .hidden{display:none!important}
-.result{background:rgba(255,255,255,.94);color:#20243a;border-radius:28px;padding:25px 18px;border:3px solid #fff;box-shadow:0 16px 35px rgba(124,58,237,.12)}
-.rank{font-weight:900;font-size:20px;margin-bottom:13px;color:#7c3aed}.title{font-weight:900;font-size:clamp(23px,6vw,37px);line-height:1.25}.quote{color:#566070;line-height:1.7;margin:14px 0;font-size:15px}.prob{display:inline-block;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:8px 13px;font-weight:900;font-size:13px;margin-top:12px}.desc{color:#697386;font-size:14px;line-height:1.65;margin:13px auto 0;max-width:560px}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.again{background:linear-gradient(90deg,#fbbf24,#fb7185);color:white}
-.multi-results{display:grid;gap:12px;margin-top:16px;text-align:left}.multi-card{background:#fff;border:2px solid #ede9fe;border-radius:20px;padding:15px 16px;box-shadow:0 7px 18px rgba(15,23,42,.06)}.multi-no{font-size:12px;font-weight:900;color:#9ca3af;margin-bottom:4px}.multi-card .rank{font-size:16px;margin-bottom:5px}.multi-card .title{font-size:19px}.multi-card .desc,.multi-card .quote{margin-top:7px;font-size:13px}.multi-card .prob{font-size:12px;margin-top:8px}
-.note,.footer{color:#7c8496;font-size:10px;line-height:1.7;margin-top:16px}.footer{margin-top:25px}
-.overlay{position:fixed;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.96),rgba(236,72,153,.94),rgba(245,158,11,.94));z-index:5;display:flex;align-items:center;justify-content:center;flex-direction:column;color:white}.overlay .machine{transform:scale(.82);margin:-30px 0}.loading{font-weight:900;font-size:21px;text-shadow:0 3px 10px rgba(0,0,0,.18);animation:loadingPop .7s ease-in-out infinite alternate}.loading:after{content:" ✦ ✧ ★";animation:spinStars 1s linear infinite;display:inline-block}.gacha-spinning{animation:gachaShake .14s infinite alternate,gachaGlow .55s infinite alternate!important}.gacha-spinning .knob{animation:turn .35s linear infinite}.gacha-spinning .capsule{animation:capsuleBounce .25s infinite alternate}
-@keyframes turn{to{transform:rotate(360deg)}}@keyframes gachaShake{from{transform:translateY(0) rotate(-2deg) scale(1)}to{transform:translateY(-9px) rotate(2deg) scale(1.045)}}@keyframes gachaGlow{from{filter:drop-shadow(0 0 10px rgba(255,255,255,.25))}to{filter:drop-shadow(0 0 32px rgba(255,255,255,.85))}}@keyframes capsuleBounce{from{transform:translateY(0) rotate(-10deg)}to{transform:translateY(-12px) rotate(12deg)}}@keyframes loadingPop{from{transform:scale(1);opacity:.75}to{transform:scale(1.08);opacity:1}}@keyframes spinStars{to{transform:rotate(360deg) scale(1.1)}}@keyframes twinkle{from{transform:scale(.8) rotate(0);opacity:.5}to{transform:scale(1.25) rotate(15deg);opacity:1}}
-@media(max-width:500px){.machine{transform:scale(.92);margin-bottom:4px}.gacha5{font-size:14px}.multi-card .title{font-size:17px}}
+.result-title{font-size:29px;font-weight:1000;margin:0 0 13px}.result-list{display:grid;gap:12px}.result{background:var(--paper);color:#17171b;border:3px solid #17171b;border-radius:23px;padding:18px 15px;text-align:center;box-shadow:5px 5px 0 #17171b}.rank{font-weight:1000;font-size:17px;margin-bottom:9px}.title{font-weight:1000;font-size:clamp(22px,6vw,32px);line-height:1.25}.quote{color:#565b67;line-height:1.65;margin:10px 0;font-weight:700}.prob{display:inline-block;background:#17171b;color:#fff;border-radius:999px;padding:7px 12px;font-weight:1000;font-size:12px;margin-top:8px}.desc{color:#626774;font-size:12px;line-height:1.6;margin-top:10px}.again{background:var(--yellow);margin-top:20px}.note,.footer{font-size:10px;line-height:1.7;margin-top:18px;font-weight:700}.footer{margin-top:25px}
+.overlay{position:fixed;inset:0;background:rgba(23,23,27,.94);z-index:20;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:22px;text-align:center}.overlay .machine{margin:0 auto 4px;transform:scale(.88);flex:none}.loading-wrap{width:min(92vw,440px);margin-top:-10px}.loading{color:#fff;font-weight:1000;font-size:21px;line-height:1.3}.loading-sub{color:#ffd84d;font-weight:900;font-size:12px;margin-top:8px}.dots{display:inline-block;min-width:24px;text-align:left}.dots:after{content:"";animation:dots 1s steps(4,end) infinite}@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}100%{content:""}}
+@media(max-width:380px){.machine{transform:scale(.9);transform-origin:top center;margin-bottom:-22px}.overlay .machine{transform:scale(.76);margin-bottom:-70px}}
 </style>
 </head>
 <body>
@@ -39,43 +45,45 @@ button{border:0;border-radius:999px;padding:15px 23px;font-weight:900;font-size:
 <div class="logo">OFFICIAL HIGE DANDISM</div>
 <h1>🎰 Official髭男dism<br>ランダムガチャ</h1>
 <div class="sub">あなたを待っているのは、どんな結果？</div>
+<div class="home-card">
 <div class="machine" id="machine"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div>
-<button class="main" onclick="start(1)">🎰 ガチャを1回まわす</button><br>
-<button class="gacha5" onclick="start(5)">🎰 ガチャを5回まわす</button>
+<div class="buttons"><button class="main" onclick="start(1)">🎰 ガチャを1回まわす</button><button class="five" onclick="start(5)">🎰 ガチャを5回まわす</button></div>
 <div class="note">※ファンメイドの非公式コンテンツです</div>
+</div>
 </section>
-<section id="resultScreen" class="hidden"><div class="logo">YOUR RESULT</div><h1 style="font-size:30px">🎉 ガチャ結果！</h1><div id="result"></div></section>
+<section id="resultScreen" class="hidden">
+<div class="logo">YOUR RESULT</div><h2 class="result-title">🎉 ガチャ結果！</h2><div id="result" class="result-list"></div>
+<button class="again" onclick="again()">🎰 もう一回まわす</button>
+</section>
 <div class="footer">Official髭男dism公式とは関係ありません。<br>個人制作のファンメイドコンテンツです。</div>
 </div>
-<div id="overlay" class="overlay hidden"><div class="machine" id="mini"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div><div class="loading">ガチャを回しています…</div></div>
+<div id="overlay" class="overlay hidden"><div class="machine" id="mini"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div><div class="loading-wrap"><div class="loading">ガチャを回しています<span class="dots"></span></div><div class="loading-sub">レバーを回して、結果を抽選中… ✦</div></div></div>
 <script>
 const data=[
-["N","ふつう",50,[
-["コラボキンキンダンブラー","世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！"],
-["デジタルボーナス(藤原聡が歌う姿)","...またかっ！"],["デジタルボーナス(小笹大輔がギターを掲げる姿)","...またかっ！"],["デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)","...またかっ！"],["デジタルボーナス(ちゃんまつの後ろ姿)","...またかっ！"],["デジタルボーナス(集合ver)","...またかっ！"],
-["メモリアルチケット","ふつうに嬉しい！"],["銀テ1本","1本でも取れて嬉しい。大事に持ち帰ろう！"],["次回ライブの座席運UP券","次は1列でも前になりますように！"]]],
-["R","ちょっといい",30,[
-["銀テ5本","フォローワーさんにあげる心の余裕ができるね！"],["次回ツアーのチケット","お席用意してくれてありがとう！"],["好きな曲が次回ツアーのセトリ入り","場合によっては、大号泣"],["好きな曲がライブの1曲目","やばすぎる。"],["アリーナ席確定チケット","どこの席でも楽しいけど、アリーナはテンションあがっちゃう！"],["次のライブで絶対に良席になる権利","1番嬉しいかも！"],["自分の好きな曲がライブで特別アレンジされる","五感に焼き付けましょう"],["自分の誕生日に髭男のライブが開催される","一生忘れられないお誕生日プレゼント"]]],
-["SR","レア",12,[
-["さとっちゃんの投げたタオル","...どうする？さすがに、匂い嗅ぐ...？"],["ちゃんまつのドラムスティック","ちゃんまつがにこにこしながら近づいてきてアイコンタクトの後、見事にキャッチ！"],["大ちゃんのピック","ピックを受け取ったあと、大ちゃんからのキラースマイルもプレゼント！"],["サイン入りタオル","洗えない、絶対"],["銀テ10本","もはや、周りの人の奪ったレベル"],["にこにこの楢ちゃんと目が合う","こっちは倍にこにこしちゃうね"],["さとっちゃんと目が合う","真っ直ぐな目で見られたら時が止まっちゃうよ"],["大ちゃんと目が合う","恋に落ちちゃうね"],["ちゃんまつと目が合う","結構ステージから距離あるのに目が合うなんて奇跡だね！"],["ならちゃんがこっちを見て笑う","つられてこちらも笑顔になっちゃうね！"]]],
-["SSR","激レア",6,[
-["次回ツアーの最前席チケット","みんなが妄想する景色！"],["さとっちゃんの作曲ルームご招待券","制作秘話に加え、生歌も聞けちゃったりして！"],["大ちゃんの機材ルームご招待券","めっちゃ予習してこ！"],["リハーサル見学券","特等席でリラックスしたメンバーを観察！"],["4人と30分お話しできる権利","...何話そう？"],["未公開音源を1曲だけ聴ける","考えるだけでドキドキ！"],["メンバー4人と記念撮影","何のポーズするか迷っちゃう！"]]],
-["UR","超激レア",1.8,[
-["自分の名前入りサイン","下の名前？フルネーム？ニックネーム？迷うよ〜！！！！"],["メンバーと1対1でお話しできる","語彙力が試されるとき...！しっかり愛を伝えられるかな？"],["好きな曲をメンバーが目の前で演奏してくれる","何の曲選べばいいのー！！！"],["4人から自分だけにメッセージ","いつも頑張っているあなたに向けた特別なメッセージ！"],["メンバーの私物","誰の何かは想像にお任せします！"],["ライブ終演後にメンバーと乾杯","何の話しよう？"]]],
-["LEGEND","神",0.2,[["藤原聡","今日はあなたのために歌います"],["小笹大輔","今日はあなたのために弾きます"],["楢﨑誠","今日はあなたのために弾きます"],["松浦匡希","今日はあなたのために叩きます"]]]
+["N","ふつう",50,["コラボキンキンダンブラー|世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！","デジタルボーナス(藤原聡が歌う姿)|…またかっ！","デジタルボーナス(小笹大輔がギターを掲げる姿)|…またかっ！","デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)|…またかっ！","デジタルボーナス(ちゃんまつの後ろ姿)|…またかっ！","デジタルボーナス(集合ver)|…またかっ！","メモリアルチケット|ふつうに嬉しい！","銀テ1本|1本でも取れて嬉しい。大事に持ち帰ろう！","次回ライブの座席運UP券|次は1列でも前になりますように！","デジタルボーナス（藤原聡の後ろ姿）|","デジタルボーナス（藤原聡のにっこりオフショット）|","デジタルボーナス(4人の後ろ姿)|","デジタルボーナス(ドラムを叩くちゃんまつ)|","デジタルボーナス(サックスを吹く楢﨑誠)|","デジタルボーナス(ピアノを弾く藤原聡)|","デジタルボーナス(前に手を伸ばす藤原聡)|"]],
+["R","ちょっといい",30,["銀テ5本|フォローワーさんにあげる心の余裕ができるね！","次回ツアーのチケット|お席用意してくれてありがとう！","好きな曲が次回ツアーのセトリ入り|場合によっては、大号泣","好きな曲がライブの1曲目|やばすぎる。","アリーナ席確定チケット|どこの席でも楽しいけど、アリーナはテンションあがっちゃう！","次のライブで絶対に良席になる権利|1番嬉しいかも！","自分の好きな曲がライブで特別アレンジされる|五感に焼き付けましょう","自分の誕生日に髭男のライブが開催される|一生忘れられないお誕生日プレゼント"]],
+["SR","レア",12,["さとっちゃんの投げたタオル|…どうする？さすがに、匂い嗅ぐ...？","ちゃんまつのドラムスティック|ちゃんまつがにこにこしながら近づいてきてアイコンタクトの後、見事にキャッチ！","大ちゃんのピック|ピックを受け取ったあと、大ちゃんからのキラースマイルもプレゼント！","サイン入りタオル|洗えない、絶対","銀テ10本|もはや、周りの人の奪ったレベル","にこにこの楢ちゃんと目が合う|こっちは倍にこにこしちゃうね","さとっちゃんと目が合う|真っ直ぐな目で見られたら時が止まっちゃうよ","大ちゃんと目が合う|恋に落ちちゃうね","ちゃんまつと目が合う|結構ステージから距離あるのに目が合うなんて奇跡だね！","ならちゃんがこっちを見て笑う|つられてこちらも笑顔になっちゃうね"]],
+["SSR","激レア",6,["次回ツアーの最前席チケット|みんなが妄想する景色！","さとっちゃんの作曲ルームご招待券|制作秘話に加え、生歌も聞けちゃったりして！","大ちゃんの機材ルームご招待券|めっちゃ予習してこ！","リハーサル見学券|特等席でリラックスしたメンバーを観察！","4人と30分お話しできる権利|...何話そう？","未公開音源を1曲だけ聴ける|考えるだけでドキドキ！","メンバー4人と記念撮影|何のポーズするか迷っちゃう！"]],
+["UR","超激レア",1.8,["自分の名前入りサイン|下の名前？フルネーム？ニックネーム？迷うよ〜！！！！","メンバーと1対1でお話しできる|語彙力が試されるとき...！しっかり愛を伝えられるかな？","好きな曲をメンバーが目の前で演奏してくれる|何の曲選べばいいのー！！！","4人から自分だけにメッセージ|いつも頑張っているあなたに向けた特別なメッセージ！","メンバーの私物|誰の何かは想像にお任せします！","ライブ終演後にメンバーと乾杯|何の話しよう？"]],
+["LEGEND","神",0.2,["藤原聡|今日はあなたのために歌います","小笹大輔|今日はあなたのために弾きます","楢﨑誠|今日はあなたのために弾きます","松浦匡希|今日はあなたのために叩きます"]]
 ];
-const starMap={N:"🌟",R:"🌟🌟",SR:"🌟🌟🌟",SSR:"🌟🌟🌟🌟",UR:"🌟🌟🌟🌟🌟",LEGEND:"🌟🌟🌟🌟🌟🌟"};
+const stars={N:"🌟",R:"🌟🌟",SR:"🌟🌟🌟",SSR:"🌟🌟🌟🌟",UR:"🌟🌟🌟🌟🌟",LEGEND:"🌟🌟🌟🌟🌟🌟"};
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-function rankText(d){return d[1]+"："+starMap[d[0]]}
+function parseItem(s){const i=s.indexOf('|');return i<0?{title:s,comment:""}:{title:s.slice(0,i),comment:s.slice(i+1)}}
 function pick(){let n=Math.random()*100;for(const d of data){if(n<d[2])return d;n-=d[2]}return data[0]}
-function getResult(){const d=pick();const item=d[3][Math.floor(Math.random()*d[3].length)];return {d,item}}
+function oneResult(){const d=pick(),item=parseItem(d[3][Math.floor(Math.random()*d[3].length)]),prob=d[2]/d[3].length;return {d,item,prob}}
 function start(count){
- document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.add("hidden");document.getElementById("overlay").classList.remove("hidden");
- const m=document.getElementById("mini");m.classList.remove("gacha-spinning");void m.offsetWidth;m.classList.add("gacha-spinning");
- setTimeout(()=>{m.classList.remove("gacha-spinning");const results=Array.from({length:count},getResult);document.getElementById("overlay").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");count===1?renderSingle(results[0]):renderFive(results)},2600)
+ const overlay=document.getElementById("overlay"),mini=document.getElementById("mini");
+ overlay.classList.remove("hidden");mini.classList.remove("spin");void mini.offsetWidth;mini.classList.add("spin");
+ setTimeout(()=>{const results=Array.from({length:count},oneResult);show(results)},2500)
 }
-function renderSingle(r){const d=r.d,item=r.item,prob=(d[2]/d[3].length).toFixed(2);const probHtml=["SR","SSR","UR","LEGEND"].includes(d[0])?`<div class="prob">出現確率：${prob}%</div>`:"";const body=d[0]==="LEGEND"?`<div class="quote">「${esc(item[1])}」</div>`:`<div class="desc">${esc(item[1])}</div>`;document.getElementById("result").innerHTML=`<div class="result"><div class="rank">${rankText(d)}</div><div class="title">${d[0]==="LEGEND"?"👼🏻 ":""}${esc(item[0])}</div>${body}${probHtml}<div class="actions"><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>`}
-function renderFive(results){const cards=results.map((r,i)=>{const d=r.d,item=r.item,prob=(d[2]/d[3].length).toFixed(2);const probHtml=["SR","SSR","UR","LEGEND"].includes(d[0])?`<div class="prob">出現確率：${prob}%</div>`:"";const body=d[0]==="LEGEND"?`<div class="quote">「${esc(item[1])}」</div>`:`<div class="desc">${esc(item[1])}</div>`;return `<div class="multi-card"><div class="multi-no">RESULT ${i+1}</div><div class="rank">${rankText(d)}</div><div class="title">${d[0]==="LEGEND"?"👼🏻 ":""}${esc(item[0])}</div>${body}${probHtml}</div>`}).join("");document.getElementById("result").innerHTML=`<div class="result"><h2 style="margin:0">🎉 5連ガチャ結果！</h2><div class="multi-results">${cards}</div><div class="actions"><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>`}
+function show(results){
+ document.getElementById("overlay").classList.add("hidden");document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");
+ document.getElementById("result").innerHTML=results.map((r,i)=>{
+   const d=r.d,it=r.item,showProb=["SR","SSR","UR","LEGEND"].includes(d[0]);
+   return `<div class="result"><div class="rank">${stars[d[0]]}</div><div class="title">${esc(it.title)}</div>${it.comment?`<div class="quote">「${esc(it.comment)}」</div>`:""}${showProb?`<div class="prob">出現確率：約${r.prob.toFixed(2)}%</div>`:""}<div class="desc">${d[1]}ランク</div></div>`
+ }).join("");
+}
 function again(){location.reload()}
 </script>
 </body>
