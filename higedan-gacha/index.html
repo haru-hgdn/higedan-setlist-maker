@@ -5,30 +5,32 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Official髭男dism ランダムガチャ</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#101827;color:#fffdf7;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
-.app{max-width:620px;min-height:100vh;margin:auto;padding:28px 18px 36px;text-align:center}
-.logo{color:#9de8d2;font-size:12px;font-weight:800;letter-spacing:.15em;margin:8px 0 18px}
-h1{font-size:clamp(30px,8vw,45px);line-height:1.15;margin:0 0 12px}.sub{color:#aeb7c6;font-size:13px;margin-bottom:30px}
-.machine{width:280px;height:360px;margin:0 auto 28px;position:relative}
-.top{position:absolute;left:28px;top:0;width:224px;height:82px;background:#29364e;border:4px solid #52627e;border-radius:50% 50% 18px 18px}
-.glass{position:absolute;left:42px;top:38px;width:196px;height:190px;background:#1b263b;border:5px solid #52627e;border-radius:50% 50% 24px 24px;overflow:hidden}
-.globe{position:absolute;width:110px;height:110px;left:38px;top:25px;border-radius:50%;background:#ffd34e;border:5px solid #ffe789;box-shadow:inset -15px -15px #dba82c55}
-.capsule{position:absolute;width:38px;height:38px;left:78px;top:106px;border-radius:50%;background:#ff9eb5;border:3px solid #fff8;transform:rotate(15deg)}
-.body{position:absolute;left:28px;top:190px;width:224px;height:130px;background:#223048;border:4px solid #52627e;border-radius:8px 8px 28px 28px}
-.slot{position:absolute;left:70px;top:25px;width:84px;height:10px;background:#080d15;border-radius:20px}
-.knob{position:absolute;right:32px;top:48px;width:40px;height:40px;border-radius:50%;background:#ffd84d;box-shadow:0 5px #b08d1d}
-.handle{position:absolute;right:0;top:74px;width:45px;height:8px;background:#7988a0;border-radius:10px;transform:rotate(70deg);transform-origin:left}
-.tray{position:absolute;left:70px;bottom:4px;width:140px;height:40px;background:#0b111d;border:4px solid #52627e;border-radius:0 0 18px 18px}
-.spin .knob{animation:turn .7s ease-in-out 3}@keyframes turn{50%{transform:rotate(80deg)}}
-button{border:0;border-radius:999px;padding:15px 25px;font-weight:900;font-size:16px;cursor:pointer}
-.main{background:#ffd84d;color:#101827;box-shadow:0 6px #b08d1d}.main:active{transform:translateY(3px)}
+*{box-sizing:border-box}
+body{margin:0;color:#20243a;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;background:linear-gradient(135deg,#fff8e7 0%,#fff0f7 48%,#eaf5ff 100%);min-height:100vh;overflow-x:hidden}
+body:before,body:after{content:"✦  ✧  ★  ✦  ✧  ★  ✦";position:fixed;z-index:-1;color:#f59e0b;font-size:28px;letter-spacing:14px;opacity:.18;pointer-events:none;white-space:nowrap}
+body:before{top:8%;left:-40px;transform:rotate(-8deg)}body:after{bottom:10%;right:-50px;transform:rotate(7deg);color:#ec4899}
+.app{max-width:680px;min-height:100vh;margin:auto;padding:28px 16px 40px;text-align:center}
+.logo{color:#7c3aed;font-size:12px;font-weight:900;letter-spacing:.15em;margin:8px 0 16px}
+h1{font-size:clamp(30px,8vw,45px);line-height:1.12;margin:0 0 10px;color:#25213b}.sub{color:#6b7280;font-size:13px;margin-bottom:22px}
+.machine{width:280px;height:360px;margin:0 auto 20px;position:relative;filter:drop-shadow(0 18px 24px rgba(124,58,237,.18))}
+.top{position:absolute;left:28px;top:0;width:224px;height:82px;background:linear-gradient(135deg,#7c3aed,#ec4899);border:5px solid #fff;border-radius:50% 50% 18px 18px;box-shadow:0 7px 0 rgba(124,58,237,.25)}
+.glass{position:absolute;left:42px;top:38px;width:196px;height:190px;background:linear-gradient(145deg,#fff7ed,#fce7f3);border:6px solid #fff;border-radius:50% 50% 24px 24px;overflow:hidden;box-shadow:inset 0 0 30px rgba(236,72,153,.12)}
+.glass:before{content:"✦";position:absolute;left:25px;top:25px;color:#f59e0b;font-size:22px;animation:twinkle 1.2s infinite alternate}.glass:after{content:"✧";position:absolute;right:25px;top:55px;color:#7c3aed;font-size:25px;animation:twinkle .9s infinite alternate-reverse}
+.globe{position:absolute;width:110px;height:110px;left:38px;top:25px;border-radius:50%;background:linear-gradient(145deg,#fcd34d,#fb7185);border:5px solid #fff;box-shadow:inset -15px -15px rgba(190,24,93,.14)}
+.capsule{position:absolute;width:38px;height:38px;left:78px;top:106px;border-radius:50%;background:#60a5fa;border:3px solid #fff;box-shadow:0 5px 12px rgba(59,130,246,.3)}
+.body{position:absolute;left:28px;top:190px;width:224px;height:130px;background:linear-gradient(145deg,#6d28d9,#db2777);border:5px solid #fff;border-radius:8px 8px 28px 28px;box-shadow:0 8px 0 rgba(124,58,237,.25)}
+.slot{position:absolute;left:70px;top:25px;width:84px;height:10px;background:#312e81;border-radius:20px}.knob{position:absolute;right:32px;top:48px;width:40px;height:40px;border-radius:50%;background:#fcd34d;border:4px solid #fff;box-shadow:0 5px 0 #d97706}.handle{position:absolute;right:0;top:74px;width:45px;height:9px;background:#fff;border-radius:10px;transform:rotate(70deg);transform-origin:left}.tray{position:absolute;left:70px;bottom:4px;width:140px;height:40px;background:#312e81;border:5px solid #fff;border-radius:0 0 18px 18px}
+button{border:0;border-radius:999px;padding:15px 23px;font-weight:900;font-size:16px;cursor:pointer;transition:.2s;box-shadow:0 7px 15px rgba(30,41,59,.13)}button:active{transform:translateY(2px)}
+.main{background:linear-gradient(90deg,#fbbf24,#fb7185,#a855f7);color:white;padding:16px 28px;font-size:17px}.main:hover{transform:translateY(-2px) scale(1.02)}
+.gacha5{margin-top:11px;background:white;color:#7c3aed;border:2px solid #c4b5fd;padding:13px 24px}.gacha5:hover{transform:translateY(-2px)}
 .hidden{display:none!important}
-.result{background:#fffdf7;color:#101827;border-radius:28px;padding:28px 20px;border:4px solid #29364e}
-.rank{font-weight:900;font-size:16px;margin-bottom:16px}.title{font-weight:900;font-size:clamp(25px,7vw,40px);line-height:1.25}.quote{color:#566070;line-height:1.7;margin:16px 0}
-.prob{display:inline-block;background:#edf1f5;border-radius:999px;padding:9px 15px;font-weight:900;font-size:13px}.desc{color:#697386;font-size:12px;margin-top:10px}
-.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.save{background:#101827;color:white}.again{background:#ffd84d;color:#101827}
-.note,.footer{color:#788397;font-size:10px;line-height:1.7;margin-top:18px}
-.overlay{position:fixed;inset:0;background:#080d16f5;z-index:5;display:flex;align-items:center;justify-content:center;flex-direction:column}.overlay .machine{transform:scale(.8);margin:-30px 0}.loading{font-weight:900;font-size:19px}
+.result{background:rgba(255,255,255,.94);color:#20243a;border-radius:28px;padding:25px 18px;border:3px solid #fff;box-shadow:0 16px 35px rgba(124,58,237,.12)}
+.rank{font-weight:900;font-size:20px;margin-bottom:13px;color:#7c3aed}.title{font-weight:900;font-size:clamp(23px,6vw,37px);line-height:1.25}.quote{color:#566070;line-height:1.7;margin:14px 0;font-size:15px}.prob{display:inline-block;background:#ede9fe;color:#6d28d9;border-radius:999px;padding:8px 13px;font-weight:900;font-size:13px;margin-top:12px}.desc{color:#697386;font-size:14px;line-height:1.65;margin:13px auto 0;max-width:560px}.actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:22px}.again{background:linear-gradient(90deg,#fbbf24,#fb7185);color:white}
+.multi-results{display:grid;gap:12px;margin-top:16px;text-align:left}.multi-card{background:#fff;border:2px solid #ede9fe;border-radius:20px;padding:15px 16px;box-shadow:0 7px 18px rgba(15,23,42,.06)}.multi-no{font-size:12px;font-weight:900;color:#9ca3af;margin-bottom:4px}.multi-card .rank{font-size:16px;margin-bottom:5px}.multi-card .title{font-size:19px}.multi-card .desc,.multi-card .quote{margin-top:7px;font-size:13px}.multi-card .prob{font-size:12px;margin-top:8px}
+.note,.footer{color:#7c8496;font-size:10px;line-height:1.7;margin-top:16px}.footer{margin-top:25px}
+.overlay{position:fixed;inset:0;background:linear-gradient(135deg,rgba(124,58,237,.96),rgba(236,72,153,.94),rgba(245,158,11,.94));z-index:5;display:flex;align-items:center;justify-content:center;flex-direction:column;color:white}.overlay .machine{transform:scale(.82);margin:-30px 0}.loading{font-weight:900;font-size:21px;text-shadow:0 3px 10px rgba(0,0,0,.18);animation:loadingPop .7s ease-in-out infinite alternate}.loading:after{content:" ✦ ✧ ★";animation:spinStars 1s linear infinite;display:inline-block}.gacha-spinning{animation:gachaShake .14s infinite alternate,gachaGlow .55s infinite alternate!important}.gacha-spinning .knob{animation:turn .35s linear infinite}.gacha-spinning .capsule{animation:capsuleBounce .25s infinite alternate}
+@keyframes turn{to{transform:rotate(360deg)}}@keyframes gachaShake{from{transform:translateY(0) rotate(-2deg) scale(1)}to{transform:translateY(-9px) rotate(2deg) scale(1.045)}}@keyframes gachaGlow{from{filter:drop-shadow(0 0 10px rgba(255,255,255,.25))}to{filter:drop-shadow(0 0 32px rgba(255,255,255,.85))}}@keyframes capsuleBounce{from{transform:translateY(0) rotate(-10deg)}to{transform:translateY(-12px) rotate(12deg)}}@keyframes loadingPop{from{transform:scale(1);opacity:.75}to{transform:scale(1.08);opacity:1}}@keyframes spinStars{to{transform:rotate(360deg) scale(1.1)}}@keyframes twinkle{from{transform:scale(.8) rotate(0);opacity:.5}to{transform:scale(1.25) rotate(15deg);opacity:1}}
+@media(max-width:500px){.machine{transform:scale(.92);margin-bottom:4px}.gacha5{font-size:14px}.multi-card .title{font-size:17px}}
 </style>
 </head>
 <body>
@@ -38,51 +40,43 @@ button{border:0;border-radius:999px;padding:15px 25px;font-weight:900;font-size:
 <h1>🎰 Official髭男dism<br>ランダムガチャ</h1>
 <div class="sub">あなたを待っているのは、どんな結果？</div>
 <div class="machine" id="machine"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div>
-<button class="main" onclick="start()">🎰 ガチャを回す</button>
+<button class="main" onclick="start(1)">🎰 ガチャを1回まわす</button><br>
+<button class="gacha5" onclick="start(5)">🎰 ガチャを5回まわす</button>
 <div class="note">※ファンメイドの非公式コンテンツです</div>
 </section>
-<section id="resultScreen" class="hidden">
-<div class="logo">YOUR RESULT</div><h1 style="font-size:30px">🎉 ガチャ結果！</h1><div id="result"></div>
-</section>
+<section id="resultScreen" class="hidden"><div class="logo">YOUR RESULT</div><h1 style="font-size:30px">🎉 ガチャ結果！</h1><div id="result"></div></section>
 <div class="footer">Official髭男dism公式とは関係ありません。<br>個人制作のファンメイドコンテンツです。</div>
 </div>
 <div id="overlay" class="overlay hidden"><div class="machine" id="mini"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div><div class="loading">ガチャを回しています…</div></div>
 <script>
 const data=[
-["N","ふつう",50,"🩶","よく出る。だけど、出たらちゃんと嬉しい。",["コラボキンキンダンブラー","ベースボールシャツ","デジタルボーナス","メモリアルチケット","銀テ1本","次回ライブの座席運UP券"]],
-["R","ちょっといい",30,"💛","ちょっとレア。ライブ前ならかなり嬉しい。",["銀テ5本","サイン入りタオル","次回ツアーのチケット","好きな曲が次回ツアーのセトリ入り","好きな曲がライブの1曲目","アリーナ席確定チケット","次のライブで絶対に良席になる権利","自分の好きな曲がライブで特別アレンジされる","自分の誕生日に髭男のライブが開催される","銀テ10本"]],
-["SR","レア",12,"💙","レア！ オタクの心がざわつく結果。",["さとっちゃんの投げたタオル","ちゃんまつのドラムスティック","大ちゃんのピック","にこにこの楢ちゃんと目が合う","さとっちゃんと目が合う","大ちゃんと目が合う","ちゃんまつと目が合う","ならちゃんがこっちを見て笑う"]],
-["SSR","激レア",6,"💜","激レア！ 一生語れる思い出になるかも。",["次回ツアーの最前席チケット","さとっちゃんの作曲ルームご招待券","大ちゃんの機材ルームご招待券","リハーサル見学券","4人と30分お話しできる権利","未公開音源を1曲だけ聴ける","メンバー4人と記念撮影"]],
-["UR","超激レア",1.8,"💎","超激レア！！ 夢みたいな結果。",["自分の名前入りサイン","メンバーと1対1でお話しできる","好きな曲をメンバーが目の前で演奏してくれる","4人から自分だけにメッセージ","メンバーの私物","ライブ終演後にメンバーと乾杯"]],
-["LEGEND","神",0.2,"👼🏻","神。引いたあなたは今日の主役。",["藤原聡","小笹大輔","楢﨑誠","松浦匡希"]]
+["N","ふつう",50,[
+["コラボキンキンダンブラー","世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！"],
+["デジタルボーナス(藤原聡が歌う姿)","...またかっ！"],["デジタルボーナス(小笹大輔がギターを掲げる姿)","...またかっ！"],["デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)","...またかっ！"],["デジタルボーナス(ちゃんまつの後ろ姿)","...またかっ！"],["デジタルボーナス(集合ver)","...またかっ！"],
+["メモリアルチケット","ふつうに嬉しい！"],["銀テ1本","1本でも取れて嬉しい。大事に持ち帰ろう！"],["次回ライブの座席運UP券","次は1列でも前になりますように！"]]],
+["R","ちょっといい",30,[
+["銀テ5本","フォローワーさんにあげる心の余裕ができるね！"],["次回ツアーのチケット","お席用意してくれてありがとう！"],["好きな曲が次回ツアーのセトリ入り","場合によっては、大号泣"],["好きな曲がライブの1曲目","やばすぎる。"],["アリーナ席確定チケット","どこの席でも楽しいけど、アリーナはテンションあがっちゃう！"],["次のライブで絶対に良席になる権利","1番嬉しいかも！"],["自分の好きな曲がライブで特別アレンジされる","五感に焼き付けましょう"],["自分の誕生日に髭男のライブが開催される","一生忘れられないお誕生日プレゼント"]]],
+["SR","レア",12,[
+["さとっちゃんの投げたタオル","...どうする？さすがに、匂い嗅ぐ...？"],["ちゃんまつのドラムスティック","ちゃんまつがにこにこしながら近づいてきてアイコンタクトの後、見事にキャッチ！"],["大ちゃんのピック","ピックを受け取ったあと、大ちゃんからのキラースマイルもプレゼント！"],["サイン入りタオル","洗えない、絶対"],["銀テ10本","もはや、周りの人の奪ったレベル"],["にこにこの楢ちゃんと目が合う","こっちは倍にこにこしちゃうね"],["さとっちゃんと目が合う","真っ直ぐな目で見られたら時が止まっちゃうよ"],["大ちゃんと目が合う","恋に落ちちゃうね"],["ちゃんまつと目が合う","結構ステージから距離あるのに目が合うなんて奇跡だね！"],["ならちゃんがこっちを見て笑う","つられてこちらも笑顔になっちゃうね！"]]],
+["SSR","激レア",6,[
+["次回ツアーの最前席チケット","みんなが妄想する景色！"],["さとっちゃんの作曲ルームご招待券","制作秘話に加え、生歌も聞けちゃったりして！"],["大ちゃんの機材ルームご招待券","めっちゃ予習してこ！"],["リハーサル見学券","特等席でリラックスしたメンバーを観察！"],["4人と30分お話しできる権利","...何話そう？"],["未公開音源を1曲だけ聴ける","考えるだけでドキドキ！"],["メンバー4人と記念撮影","何のポーズするか迷っちゃう！"]]],
+["UR","超激レア",1.8,[
+["自分の名前入りサイン","下の名前？フルネーム？ニックネーム？迷うよ〜！！！！"],["メンバーと1対1でお話しできる","語彙力が試されるとき...！しっかり愛を伝えられるかな？"],["好きな曲をメンバーが目の前で演奏してくれる","何の曲選べばいいのー！！！"],["4人から自分だけにメッセージ","いつも頑張っているあなたに向けた特別なメッセージ！"],["メンバーの私物","誰の何かは想像にお任せします！"],["ライブ終演後にメンバーと乾杯","何の話しよう？"]]],
+["LEGEND","神",0.2,[["藤原聡","今日はあなたのために歌います"],["小笹大輔","今日はあなたのために弾きます"],["楢﨑誠","今日はあなたのために弾きます"],["松浦匡希","今日はあなたのために叩きます"]]]
 ];
-const quotes={"藤原聡":"今日はあなたのために歌います","小笹大輔":"今日はあなたのために弾きます","楢﨑誠":"今日はあなたのために弾きます","松浦匡希":"今日はあなたのために叩きます"};
-const stars={N:"🌟",R:"🌟🌟",SR:"🌟🌟🌟",SSR:"🌟🌟🌟🌟",UR:"🌟🌟🌟🌟🌟",LEGEND:"🌟🌟🌟🌟🌟🌟"};
-const esc=s=>s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const starMap={N:"🌟",R:"🌟🌟",SR:"🌟🌟🌟",SSR:"🌟🌟🌟🌟",UR:"🌟🌟🌟🌟🌟",LEGEND:"🌟🌟🌟🌟🌟🌟"};
+const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function rankText(d){return d[1]+"："+starMap[d[0]]}
 function pick(){let n=Math.random()*100;for(const d of data){if(n<d[2])return d;n-=d[2]}return data[0]}
-function start(){
- document.getElementById("overlay").classList.remove("hidden");document.getElementById("mini").classList.add("spin");
- setTimeout(()=>{let d=pick(),item=d[5][Math.floor(Math.random()*d[5].length)],p=(d[2]/d[5].length).toFixed(2);show(d,item,p)},2300)
+function getResult(){const d=pick();const item=d[3][Math.floor(Math.random()*d[3].length)];return {d,item}}
+function start(count){
+ document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.add("hidden");document.getElementById("overlay").classList.remove("hidden");
+ const m=document.getElementById("mini");m.classList.remove("gacha-spinning");void m.offsetWidth;m.classList.add("gacha-spinning");
+ setTimeout(()=>{m.classList.remove("gacha-spinning");const results=Array.from({length:count},getResult);document.getElementById("overlay").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");count===1?renderSingle(results[0]):renderFive(results)},2600)
 }
-function show(d,item,p){
- document.getElementById("overlay").classList.add("hidden");document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");
- let q=d[0]=="LEGEND"?quotes[item]:"";
- let probHtml=["SR","SSR","UR","LEGEND"].includes(d[0])?'<div class="prob">出現確率：'+p+'%</div>':'';
- document.getElementById("result").innerHTML='<div class="result"><div class="rank" style="color:'+d[3]+'">'+stars[d[0]]+'</div><div class="title">'+esc(item)+'</div>'+(q?'<div class="quote">「'+esc(q)+'」</div>':'')+probHtml+'<div class="desc">'+d[4]+'</div><div class="actions"><button class="save" onclick="save()">🖼️ 結果を保存する</button><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>';
- window._result={rank:d[0],label:d[1],stars:stars[d[0]],item,prob:p,quote:q}
-}
+function renderSingle(r){const d=r.d,item=r.item,prob=(d[2]/d[3].length).toFixed(2);const probHtml=["SR","SSR","UR","LEGEND"].includes(d[0])?`<div class="prob">出現確率：${prob}%</div>`:"";const body=d[0]==="LEGEND"?`<div class="quote">「${esc(item[1])}」</div>`:`<div class="desc">${esc(item[1])}</div>`;document.getElementById("result").innerHTML=`<div class="result"><div class="rank">${rankText(d)}</div><div class="title">${d[0]==="LEGEND"?"👼🏻 ":""}${esc(item[0])}</div>${body}${probHtml}<div class="actions"><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>`}
+function renderFive(results){const cards=results.map((r,i)=>{const d=r.d,item=r.item,prob=(d[2]/d[3].length).toFixed(2);const probHtml=["SR","SSR","UR","LEGEND"].includes(d[0])?`<div class="prob">出現確率：${prob}%</div>`:"";const body=d[0]==="LEGEND"?`<div class="quote">「${esc(item[1])}」</div>`:`<div class="desc">${esc(item[1])}</div>`;return `<div class="multi-card"><div class="multi-no">RESULT ${i+1}</div><div class="rank">${rankText(d)}</div><div class="title">${d[0]==="LEGEND"?"👼🏻 ":""}${esc(item[0])}</div>${body}${probHtml}</div>`}).join("");document.getElementById("result").innerHTML=`<div class="result"><h2 style="margin:0">🎉 5連ガチャ結果！</h2><div class="multi-results">${cards}</div><div class="actions"><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>`}
 function again(){location.reload()}
-function save(){
- const r=window._result,c=document.createElement("canvas"),x=c.getContext("2d");c.width=1080;c.height=1350;
- x.fillStyle="#101827";x.fillRect(0,0,c.width,c.height);x.fillStyle="#fffdf7";x.fillRect(55,55,970,1240);x.textAlign="center";x.fillStyle="#101827";
- x.font="900 38px sans-serif";x.fillText("🎰 Official髭男dism ランダムガチャ",540,145);
- x.font="900 42px sans-serif";x.fillText(r.stars,540,255);
- x.font="900 62px sans-serif";let lines=[],cur="";for(const ch of r.item){if(x.measureText(cur+ch).width>900){lines.push(cur);cur=ch}else cur+=ch}if(cur)lines.push(cur);let y=430;lines.forEach(t=>{x.fillText(t,540,y);y+=80});
- if(r.quote){x.font="500 30px sans-serif";x.fillStyle="#566070";x.fillText("「"+r.quote+"」",540,y+30)}
- if(["SR","SSR","UR","LEGEND"].includes(r.rank)){x.fillStyle="#101827";x.font="900 32px sans-serif";x.fillText("出現確率："+r.prob+"%",540,1040);}
- x.font="500 22px sans-serif";x.fillStyle="#697386";x.fillText("ファンメイド・非公式",540,1170);
- const img=c.toDataURL("image/png"),w=window.open();if(w){w.document.write('<body style="margin:0;background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh"><img src="'+img+'" style="max-width:100%"></body>');w.document.close()}else document.body.innerHTML='<div style="background:#111;min-height:100vh;display:flex;align-items:center;justify-content:center"><img src="'+img+'" style="max-width:100%"></div>'
-}
 </script>
 </body>
 </html>
