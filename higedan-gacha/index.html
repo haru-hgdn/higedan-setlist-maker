@@ -49,7 +49,7 @@ button{border:0;border-radius:999px;padding:15px 25px;font-weight:900;font-size:
 <div id="overlay" class="overlay hidden"><div class="machine" id="mini"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div><div class="loading">ガチャを回しています…</div></div>
 <script>
 const data=[
-["N","ふつう",50,"🩶","よく出る。だけど、出たらちゃんと嬉しい。",["コラボキンキンダンブラー","ベースボールシャツ","デジタルボーナス","メモリアルチケット","銀テ1本","ライブフォト","オリジナルステッカー","次回ライブの座席運UP券"]],
+["N","ふつう",50,"🩶","よく出る。だけど、出たらちゃんと嬉しい。",["コラボキンキンダンブラー","ベースボールシャツ","デジタルボーナス","メモリアルチケット","銀テ1本","次回ライブの座席運UP券"]],
 ["R","ちょっといい",30,"💛","ちょっとレア。ライブ前ならかなり嬉しい。",["銀テ5本","サイン入りタオル","次回ツアーのチケット","好きな曲が次回ツアーのセトリ入り","好きな曲がライブの1曲目","アリーナ席確定チケット","次のライブで絶対に良席になる権利","自分の好きな曲がライブで特別アレンジされる","自分の誕生日に髭男のライブが開催される","銀テ10本"]],
 ["SR","レア",12,"💙","レア！ オタクの心がざわつく結果。",["さとっちゃんの投げたタオル","ちゃんまつのドラムスティック","大ちゃんのピック","にこにこの楢ちゃんと目が合う","さとっちゃんと目が合う","大ちゃんと目が合う","ちゃんまつと目が合う","ならちゃんがこっちを見て笑う"]],
 ["SSR","激レア",6,"💜","激レア！ 一生語れる思い出になるかも。",["次回ツアーの最前席チケット","さとっちゃんの作曲ルームご招待券","大ちゃんの機材ルームご招待券","リハーサル見学券","4人と30分お話しできる権利","未公開音源を1曲だけ聴ける","メンバー4人と記念撮影"]],
@@ -57,6 +57,7 @@ const data=[
 ["LEGEND","神",0.2,"👼🏻","神。引いたあなたは今日の主役。",["藤原聡","小笹大輔","楢﨑誠","松浦匡希"]]
 ];
 const quotes={"藤原聡":"今日はあなたのために歌います","小笹大輔":"今日はあなたのために弾きます","楢﨑誠":"今日はあなたのために弾きます","松浦匡希":"今日はあなたのために叩きます"};
+const stars={N:"🌟",R:"🌟🌟",SR:"🌟🌟🌟",SSR:"🌟🌟🌟🌟",UR:"🌟🌟🌟🌟🌟",LEGEND:"🌟🌟🌟🌟🌟🌟"};
 const esc=s=>s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function pick(){let n=Math.random()*100;for(const d of data){if(n<d[2])return d;n-=d[2]}return data[0]}
 function start(){
@@ -66,18 +67,19 @@ function start(){
 function show(d,item,p){
  document.getElementById("overlay").classList.add("hidden");document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");
  let q=d[0]=="LEGEND"?quotes[item]:"";
- document.getElementById("result").innerHTML='<div class="result"><div class="rank" style="color:'+d[3]+'">'+d[3]+' '+d[0]+'（'+d[1]+'）</div><div class="title">'+esc(item)+'</div>'+(q?'<div class="quote">「'+esc(q)+'」</div>':'')+'<div class="prob">出現確率：'+p+'%</div><div class="desc">'+d[4]+'</div><div class="actions"><button class="save" onclick="save()">🖼️ 結果を保存する</button><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>';
- window._result={rank:d[0],label:d[1],icon:d[3],item,prob:p,quote:q}
+ let probHtml=["SR","SSR","UR","LEGEND"].includes(d[0])?'<div class="prob">出現確率：'+p+'%</div>':'';
+ document.getElementById("result").innerHTML='<div class="result"><div class="rank" style="color:'+d[3]+'">'+stars[d[0]]+'</div><div class="title">'+esc(item)+'</div>'+(q?'<div class="quote">「'+esc(q)+'」</div>':'')+probHtml+'<div class="desc">'+d[4]+'</div><div class="actions"><button class="save" onclick="save()">🖼️ 結果を保存する</button><button class="again" onclick="again()">🎰 もう一回まわす</button></div></div>';
+ window._result={rank:d[0],label:d[1],stars:stars[d[0]],item,prob:p,quote:q}
 }
 function again(){location.reload()}
 function save(){
  const r=window._result,c=document.createElement("canvas"),x=c.getContext("2d");c.width=1080;c.height=1350;
  x.fillStyle="#101827";x.fillRect(0,0,c.width,c.height);x.fillStyle="#fffdf7";x.fillRect(55,55,970,1240);x.textAlign="center";x.fillStyle="#101827";
  x.font="900 38px sans-serif";x.fillText("🎰 Official髭男dism ランダムガチャ",540,145);
- x.font="900 42px sans-serif";x.fillText(r.icon+" "+r.rank+"（"+r.label+"）",540,255);
+ x.font="900 42px sans-serif";x.fillText(r.stars,540,255);
  x.font="900 62px sans-serif";let lines=[],cur="";for(const ch of r.item){if(x.measureText(cur+ch).width>900){lines.push(cur);cur=ch}else cur+=ch}if(cur)lines.push(cur);let y=430;lines.forEach(t=>{x.fillText(t,540,y);y+=80});
  if(r.quote){x.font="500 30px sans-serif";x.fillStyle="#566070";x.fillText("「"+r.quote+"」",540,y+30)}
- x.fillStyle="#101827";x.font="900 32px sans-serif";x.fillText("出現確率："+r.prob+"%",540,1040);
+ if(["SR","SSR","UR","LEGEND"].includes(r.rank)){x.fillStyle="#101827";x.font="900 32px sans-serif";x.fillText("出現確率："+r.prob+"%",540,1040);}
  x.font="500 22px sans-serif";x.fillStyle="#697386";x.fillText("ファンメイド・非公式",540,1170);
  const img=c.toDataURL("image/png"),w=window.open();if(w){w.document.write('<body style="margin:0;background:#111;display:flex;justify-content:center;align-items:center;min-height:100vh"><img src="'+img+'" style="max-width:100%"></body>');w.document.close()}else document.body.innerHTML='<div style="background:#111;min-height:100vh;display:flex;align-items:center;justify-content:center"><img src="'+img+'" style="max-width:100%"></div>'
 }
