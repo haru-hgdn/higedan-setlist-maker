@@ -149,6 +149,17 @@ button{
 .quote{color:#66736f;line-height:1.65;margin:10px 0;font-weight:650}
 .prob{display:inline-block;background:#344b58;color:#f7f3e8;border-radius:999px;padding:7px 12px;font-weight:850;font-size:12px;margin-top:8px}
 .desc{color:#77827f;font-size:12px;line-height:1.6;margin-top:10px}
+.bonus-detail{font-size:.78em;font-weight:750;letter-spacing:0;color:#5d6b68}
+.result .quote{overflow-wrap:anywhere}
+@media(max-width:600px){
+ .result-list{gap:7px}
+ .result{border-radius:16px;padding:9px 10px}
+ .rank{font-size:12px;margin-bottom:3px;letter-spacing:.04em}
+ .title{font-size:18px;line-height:1.18}
+ .quote{font-size:11px;line-height:1.38;margin:4px 0 2px}
+ .prob{font-size:9px;padding:4px 8px;margin-top:3px}
+ #resultScreen .again{margin-top:10px;padding:10px 16px;font-size:13px}
+}
 .again{background:#d2b66f;margin-top:20px;color:#263943}
 .note,.footer{font-size:10px;line-height:1.7;margin-top:18px;font-weight:650;color:#78837f}
 .footer{margin-top:25px}
@@ -194,7 +205,7 @@ button{
 <div id="overlay" class="overlay hidden"><div class="machine" id="mini"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div><div class="loading-wrap"><div class="loading">ガチャを回しています<span class="dots"></span></div><div class="loading-sub">レバーを回して、結果を抽選中… ✦</div></div></div>
 <script>
 const data=[
-["N","ふつう",60,["コラボキンキンダンブラー|世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！","デジタルボーナス(藤原聡が歌う姿)|…またかっ！","デジタルボーナス(小笹大輔がギターを掲げる姿)|…またかっ！","デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)|…またかっ！","デジタルボーナス(ちゃんまつの後ろ姿)|…またかっ！","デジタルボーナス(集合ver)|…またかっ！","メモリアルチケット|ふつうに嬉しい！","銀テ1本|1本でも取れて嬉しい。大事に持ち帰ろう！","次回ライブの座席運UP券|次は1列でも前になりますように！","デジタルボーナス（藤原聡の後ろ姿）|","デジタルボーナス（藤原聡のにっこりオフショット）|","デジタルボーナス(4人の後ろ姿)|","デジタルボーナス(ドラムを叩くちゃんまつ)|","デジタルボーナス(サックスを吹く楢﨑誠)|","デジタルボーナス(ピアノを弾く藤原聡)|","デジタルボーナス(前に手を伸ばす藤原聡)|"]],
+["N","ふつう",60,["コラボキンキンダンブラー|世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！","デジタルボーナス(藤原聡が歌う姿)|…またかっ！","デジタルボーナス(小笹大輔がギターを掲げる姿)|…またかっ！","デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)|…またかっ！","デジタルボーナス(ちゃんまつの後ろ姿)|…またかっ！","デジタルボーナス(集合ver)|…またかっ！","メモリアルチケット|ふつうに嬉しい！","銀テ1本|1本でも取れて嬉しい。大事に持ち帰ろう！","次回ライブの座席運UP券|次は1列でも前になりますように！","デジタルボーナス（藤原聡の後ろ姿）|…またかっ！","デジタルボーナス（藤原聡のにっこりオフショット）|…またかっ！","デジタルボーナス(4人の後ろ姿)|…またかっ！","デジタルボーナス(ドラムを叩くちゃんまつ)|…またかっ！","デジタルボーナス(サックスを吹く楢﨑誠)|…またかっ！","デジタルボーナス(ピアノを弾く藤原聡)|…またかっ！","デジタルボーナス(前に手を伸ばす藤原聡)|…またかっ！"]],
 ["R","ちょっといい",26,["銀テ5本|フォローワーさんにあげる心の余裕ができるね！","次回ツアーのチケット|お席用意してくれてありがとう！","好きな曲が次回ツアーのセトリ入り|場合によっては、大号泣","好きな曲がライブの1曲目|やばすぎる。","アリーナ席確定チケット|どこの席でも楽しいけど、アリーナはテンションあがっちゃう！","次のライブで絶対に良席になる権利|1番嬉しいかも！","自分の好きな曲がライブで特別アレンジされる|五感に焼き付けましょう","自分の誕生日に髭男のライブが開催される|一生忘れられないお誕生日プレゼント"]],
 ["SR","レア",9,["さとっちゃんの投げたタオル|…どうする？さすがに、匂い嗅ぐ...？","ちゃんまつのドラムスティック|ちゃんまつがにこにこしながら近づいてきてアイコンタクトの後、見事にキャッチ！","大ちゃんのピック|ピックを受け取ったあと、大ちゃんからのキラースマイルもプレゼント！","サイン入りタオル|洗えない、絶対","銀テ10本|もはや、周りの人の奪ったレベル","にこにこの楢ちゃんと目が合う|こっちは倍にこにこしちゃうね","さとっちゃんと目が合う|真っ直ぐな目で見られたら時が止まっちゃうよ","大ちゃんと目が合う|恋に落ちちゃうね","ちゃんまつと目が合う|結構ステージから距離あるのに目が合うなんて奇跡だね！","ならちゃんがこっちを見て笑う|つられてこちらも笑顔になっちゃうね"]],
 ["SSR","激レア",4,["次回ツアーの最前席チケット|みんなが妄想する景色！","さとっちゃんの作曲ルームご招待券|制作秘話に加え、生歌も聞けちゃったりして！","大ちゃんの機材ルームご招待券|めっちゃ予習してこ！","リハーサル見学券|特等席でリラックスしたメンバーを観察！","4人と30分お話しできる権利|...何話そう？","未公開音源を1曲だけ聴ける|考えるだけでドキドキ！","メンバー4人と記念撮影|何のポーズするか迷っちゃう！"]],
@@ -215,7 +226,8 @@ function show(results){
  document.getElementById("overlay").classList.add("hidden");document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");
  document.getElementById("result").innerHTML=results.map((r,i)=>{
    const d=r.d,it=r.item,showProb=["SR","SSR","UR","LEGEND"].includes(d[0]);
-   return `<div class="result"><div class="rank">${stars[d[0]]}</div><div class="title">${esc(it.title)}</div>${it.comment?`<div class="quote">${esc(it.comment)}</div>`:""}${showProb?`<div class="prob">出現確率：約${r.prob.toFixed(2)}%</div>`:""}<div class="desc">${d[1]}ランク</div></div>`
+   const title=esc(it.title).replace(/^デジタルボーナス([（(].*?[）)])$/, 'デジタルボーナス<br><span class="bonus-detail">$1</span>');
+   return `<div class="result"><div class="rank">${stars[d[0]]}：${esc(d[1])}</div><div class="title">${title}</div>${it.comment?`<div class="quote">${esc(it.comment)}</div>`:""}${showProb?`<div class="prob">出現確率：約${r.prob.toFixed(2)}%</div>`:""}</div>`
  }).join("");
 }
 function again(){location.reload()}
