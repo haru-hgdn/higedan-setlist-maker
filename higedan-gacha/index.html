@@ -235,13 +235,20 @@ let firstFourNormalUsed=false;
 
 function digitalResult(){
   const pool=data[0][3].filter(x=>x.startsWith("デジタルボーナス") && !firstFourDigitalTitles.includes(x));
-  const item=parseItem(pool[Math.floor(Math.random()*pool.length)]);
-  firstFourDigitalTitles.push(item.title + "|" + item.comment);
-  return {d:data[0],item,prob:data[0][2]/data[0][3].length};
+  const chosen=pool[Math.floor(Math.random()*pool.length)];
+  firstFourDigitalTitles.push(chosen);
+  return {d:data[0],item:parseItem(chosen),prob:data[0][2]/data[0][3].length};
 }
 
-function normalRResult(){
-  const d=data.find(x=>x[0]==="R");
+function rareOrHigherResult(){
+  // R以上から通常のランク確率に沿って抽選
+  const pool=data.filter(x=>["R","SR","SSR","UR","LEGEND"].includes(x[0]));
+  let n=Math.random()*40;
+  let d=pool[0];
+  for(const candidate of pool){
+    if(n<candidate[2]){d=candidate;break;}
+    n-=candidate[2];
+  }
   const item=parseItem(d[3][Math.floor(Math.random()*d[3].length)]);
   return {d,item,prob:d[2]/d[3].length};
 }
@@ -257,12 +264,11 @@ function start(count){
      if(singlePullCount===1){
        results=[digitalResult()];
      }else if(singlePullCount<=4){
-       // 2〜4回目のうち、ランダムな1回だけRランク。
        if(!firstFourNormalUsed){
          const remaining=5-singlePullCount;
-         const makeNormal = Math.random() < (1/remaining);
+         const makeNormal=Math.random() < (1/remaining);
          if(makeNormal || singlePullCount===4){
-           results=[normalRResult()];
+           results=[rareOrHigherResult()];
            firstFourNormalUsed=true;
          }else{
            results=[digitalResult()];
@@ -274,8 +280,7 @@ function start(count){
        results=[oneResult()];
      }
    }else if(count===5){
-     // 5回ガチャはデジタルボーナスを最低3つ（3〜5個）確定。
-     const digitalCount=3+Math.floor(Math.random()*3);
+     const digitalCount=3+Math.floor(Math.random()*2);
      const used=[];
      results=[];
      for(let i=0;i<digitalCount;i++){
