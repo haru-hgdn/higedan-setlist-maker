@@ -308,7 +308,11 @@ function show(results){
    return `<div class="result${d[0]==="LEGEND" ? " legend-card" : ""}"><div class="rank">${stars[d[0]]}：${rankNames[d[0]]}</div><div class="title">${title}</div>${it.comment?`<div class="quote">${esc(it.comment)}</div>`:""}${showProb?`<div class="prob">出現確率：約${r.prob.toFixed(2)}%</div>`:""}</div>`
  }).join("");
 }
-function again(){location.reload()}
+function again(){
+  document.getElementById("resultScreen").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 </script>
 </body>
 </html>
