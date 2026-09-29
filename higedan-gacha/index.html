@@ -224,14 +224,18 @@ function oneResult(forceDigital=false){
   const prob=d[2]/d[3].length;
   return {d,item,prob};
 }
+let firstSinglePull=true;
 function start(count){
  const overlay=document.getElementById("overlay"),mini=document.getElementById("mini");
  overlay.classList.remove("hidden");mini.classList.remove("spin");void mini.offsetWidth;mini.classList.add("spin");
  setTimeout(()=>{
    let results;
    if(count===1){
-     results=[oneResult(true)];
+     // 最初の1回だけデジタルボーナスを確定。その後の1回ガチャは通常抽選。
+     results=[oneResult(firstSinglePull)];
+     firstSinglePull=false;
    }else if(count===5){
+     // 5回ガチャはデジタルボーナスを最低3つ確定。
      results=[oneResult(true),oneResult(true),oneResult(true),oneResult(),oneResult()];
      for(let i=results.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[results[i],results[j]]=[results[j],results[i]];}
    }else{ results=Array.from({length:count},oneResult); }
