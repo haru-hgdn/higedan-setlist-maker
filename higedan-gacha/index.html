@@ -145,7 +145,7 @@ button{
  box-shadow:0 12px 30px rgba(38,60,75,.09);backdrop-filter:blur(8px);
 }
 .rank{font-weight:900;font-size:16px;margin-bottom:9px;letter-spacing:.08em}
-.title{font-weight:900;font-size:clamp(22px,6vw,32px);line-height:1.25;color:#263943}
+.title{font-weight:900;font-size:clamp(22px,6vw,32px);line-height:1.25;color:#263943}.digital-sub{font-size:.78em;line-height:1.15}
 .quote{color:#66736f;line-height:1.65;margin:10px 0;font-weight:650}
 .prob{display:inline-block;background:#344b58;color:#f7f3e8;border-radius:999px;padding:7px 12px;font-weight:850;font-size:12px;margin-top:8px}
 .desc{color:#77827f;font-size:12px;line-height:1.6;margin-top:10px}
@@ -205,8 +205,8 @@ button{
 <div id="overlay" class="overlay hidden"><div class="machine" id="mini"><div class="top"></div><div class="glass"><div class="globe"></div><div class="capsule"></div></div><div class="body"><div class="slot"></div><div class="knob"></div><div class="handle"></div></div><div class="tray"></div></div><div class="loading-wrap"><div class="loading">ガチャを回しています<span class="dots"></span></div><div class="loading-sub">レバーを回して、結果を抽選中… ✦</div></div></div>
 <script>
 const data=[
-["N","ふつう",60,["コラボキンキンダンブラー|世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！","デジタルボーナス(藤原聡が歌う姿)|…またかっ！","デジタルボーナス(小笹大輔がギターを掲げる姿)|…またかっ！","デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)|…またかっ！","デジタルボーナス(ちゃんまつの後ろ姿)|…またかっ！","デジタルボーナス(集合ver)|…またかっ！","メモリアルチケット|ふつうに嬉しい！","銀テ1本|1本でも取れて嬉しい。大事に持ち帰ろう！","次回ライブの座席運UP券|次は1列でも前になりますように！","デジタルボーナス（藤原聡の後ろ姿）|…またかっ！","デジタルボーナス（藤原聡のにっこりオフショット）|…またかっ！","デジタルボーナス(4人の後ろ姿)|…またかっ！","デジタルボーナス(ドラムを叩くちゃんまつ)|…またかっ！","デジタルボーナス(サックスを吹く楢﨑誠)|…またかっ！","デジタルボーナス(ピアノを弾く藤原聡)|…またかっ！","デジタルボーナス(前に手を伸ばす藤原聡)|…またかっ！"]],
-["R","ちょっといい",26,["銀テ5本|フォローワーさんにあげる心の余裕ができるね！","次回ツアーのチケット|お席用意してくれてありがとう！","好きな曲が次回ツアーのセトリ入り|場合によっては、大号泣","好きな曲がライブの1曲目|やばすぎる。","アリーナ席確定チケット|どこの席でも楽しいけど、アリーナはテンションあがっちゃう！","次のライブで絶対に良席になる権利|1番嬉しいかも！","自分の好きな曲がライブで特別アレンジされる|五感に焼き付けましょう","自分の誕生日に髭男のライブが開催される|一生忘れられないお誕生日プレゼント"]],
+["N","ノーマル",60,["コラボキンキンダンブラー|世間を賑わせたタンブラー。受注生産になったから手に入りやすくなった！","デジタルボーナス(藤原聡が歌う姿)|…またかっ！","デジタルボーナス(小笹大輔がギターを掲げる姿)|…またかっ！","デジタルボーナス(楢ちゃんが俯きながらギターを演奏する姿)|…またかっ！","デジタルボーナス(ちゃんまつの後ろ姿)|…またかっ！","デジタルボーナス(集合ver)|…またかっ！","メモリアルチケット|ふつうに嬉しい！","銀テ1本|1本でも取れて嬉しい。大事に持ち帰ろう！","次回ライブの座席運UP券|次は1列でも前になりますように！","デジタルボーナス（藤原聡の後ろ姿）|…またかっ！","デジタルボーナス（藤原聡のにっこりオフショット）|…またかっ！","デジタルボーナス(4人の後ろ姿)|…またかっ！","デジタルボーナス(ドラムを叩くちゃんまつ)|…またかっ！","デジタルボーナス(サックスを吹く楢﨑誠)|…またかっ！","デジタルボーナス(ピアノを弾く藤原聡)|…またかっ！","デジタルボーナス(前に手を伸ばす藤原聡)|…またかっ！"]],
+["R","ちょいレア",26,["銀テ5本|フォローワーさんにあげる心の余裕ができるね！","次回ツアーのチケット|お席用意してくれてありがとう！","好きな曲が次回ツアーのセトリ入り|場合によっては、大号泣","好きな曲がライブの1曲目|やばすぎる。","アリーナ席確定チケット|どこの席でも楽しいけど、アリーナはテンションあがっちゃう！","次のライブで絶対に良席になる権利|1番嬉しいかも！","自分の好きな曲がライブで特別アレンジされる|五感に焼き付けましょう","自分の誕生日に髭男のライブが開催される|一生忘れられないお誕生日プレゼント"]],
 ["SR","レア",9,["さとっちゃんの投げたタオル|…どうする？さすがに、匂い嗅ぐ...？","ちゃんまつのドラムスティック|ちゃんまつがにこにこしながら近づいてきてアイコンタクトの後、見事にキャッチ！","大ちゃんのピック|ピックを受け取ったあと、大ちゃんからのキラースマイルもプレゼント！","サイン入りタオル|洗えない、絶対","銀テ10本|もはや、周りの人の奪ったレベル","にこにこの楢ちゃんと目が合う|こっちは倍にこにこしちゃうね","さとっちゃんと目が合う|真っ直ぐな目で見られたら時が止まっちゃうよ","大ちゃんと目が合う|恋に落ちちゃうね","ちゃんまつと目が合う|結構ステージから距離あるのに目が合うなんて奇跡だね！","ならちゃんがこっちを見て笑う|つられてこちらも笑顔になっちゃうね"]],
 ["SSR","激レア",4,["次回ツアーの最前席チケット|みんなが妄想する景色！","さとっちゃんの作曲ルームご招待券|制作秘話に加え、生歌も聞けちゃったりして！","大ちゃんの機材ルームご招待券|めっちゃ予習してこ！","リハーサル見学券|特等席でリラックスしたメンバーを観察！","4人と30分お話しできる権利|...何話そう？","未公開音源を1曲だけ聴ける|考えるだけでドキドキ！","メンバー4人と記念撮影|何のポーズするか迷っちゃう！"]],
 ["UR","超激レア",0.9,["自分の名前入りサイン|下の名前？フルネーム？ニックネーム？迷うよ〜！！！！","メンバーと1対1でお話しできる|語彙力が試されるとき...！しっかり愛を伝えられるかな？","好きな曲をメンバーが目の前で演奏してくれる|何の曲選べばいいのー！！！","4人から自分だけにメッセージ|いつも頑張っているあなたに向けた特別なメッセージ！","メンバーの私物|誰の何かは想像にお任せします！","ライブ終演後にメンバーと乾杯|何の話しよう？"]],
@@ -216,11 +216,27 @@ const stars={N:"🌟",R:"🌟🌟",SR:"🌟🌟🌟",SSR:"🌟🌟🌟🌟",UR:"
 const esc=s=>String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 function parseItem(s){const i=s.indexOf('|');return i<0?{title:s,comment:""}:{title:s.slice(0,i),comment:s.slice(i+1)}}
 function pick(){let n=Math.random()*100;for(const d of data){if(n<d[2])return d;n-=d[2]}return data[0]}
-function oneResult(){const d=pick(),item=parseItem(d[3][Math.floor(Math.random()*d[3].length)]),prob=d[2]/d[3].length;return {d,item,prob}}
+function oneResult(forceDigital=false){
+  let d=pick();
+  if(forceDigital)d=data[0];
+  const items=d[3].filter(x=>forceDigital ? x.startsWith("デジタルボーナス") : true);
+  const item=parseItem(items[Math.floor(Math.random()*items.length)]);
+  const prob=d[2]/d[3].length;
+  return {d,item,prob};
+}
 function start(count){
  const overlay=document.getElementById("overlay"),mini=document.getElementById("mini");
  overlay.classList.remove("hidden");mini.classList.remove("spin");void mini.offsetWidth;mini.classList.add("spin");
- setTimeout(()=>{const results=Array.from({length:count},oneResult);show(results)},2500)
+ setTimeout(()=>{
+   let results;
+   if(count===1){
+     results=[oneResult(true)];
+   }else if(count===5){
+     results=[oneResult(true),oneResult(true),oneResult(true),oneResult(),oneResult()];
+     for(let i=results.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[results[i],results[j]]=[results[j],results[i]];}
+   }else{ results=Array.from({length:count},oneResult); }
+   show(results)
+ },2500)
 }
 function show(results){
  document.getElementById("overlay").classList.add("hidden");document.getElementById("home").classList.add("hidden");document.getElementById("resultScreen").classList.remove("hidden");
